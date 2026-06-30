@@ -9,3 +9,4 @@ requests
 pandas
 h5py
 cftime
+scipy

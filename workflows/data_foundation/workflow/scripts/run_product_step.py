@@ -36,6 +36,19 @@ def compression_encoding(ds: xr.Dataset, complevel: int = 4) -> dict:
     return {var: {"zlib": True, "complevel": complevel} for var in ds.data_vars}
 
 
+def main_data_variable(ds: xr.Dataset, preferred_names: tuple[str, ...]) -> str:
+    for name in preferred_names:
+        if name in ds.data_vars:
+            return name
+    candidates = [name for name in ds.data_vars if name.lower() not in {"crs", "spatial_ref"}]
+    if len(candidates) == 1:
+        return candidates[0]
+    raise ValueError(
+        "Could not identify a single data variable. "
+        f"Preferred={preferred_names}; available={list(ds.data_vars)}"
+    )
+
+
 def normalize_variable_name(ds: xr.Dataset, variable: str, source_name: str | None) -> xr.Dataset:
     if variable in ds.data_vars:
         return ds
@@ -152,15 +165,25 @@ def spei_prepare_monthly(args: argparse.Namespace) -> None:
     ensure_parent(args.output)
     with xr.open_dataset(args.input, engine="netcdf4") as ds:
         ds = standardize_coords(ds)
-        if "latitude" not in ds.coords and "lat" in ds.coords:
-            ds = ds.rename({"lat": "latitude"})
-        if "longitude" not in ds.coords and "lon" in ds.coords:
-            ds = ds.rename({"lon": "longitude"})
+
+        missing_coords = [
+            name for name in ("time", "latitude", "longitude")
+            if name not in ds.coords and name not in ds.dims
+        ]
+        if missing_coords:
+            raise ValueError(
+                f"SPEI input {args.input} is missing coordinates/dimensions {missing_coords}. "
+                f"Coordinates={list(ds.coords)}; dimensions={dict(ds.sizes)}"
+            )
+
+        source_var = main_data_variable(ds, (args.variable, "spei"))
+        ds = ds[[source_var]].rename({source_var: args.variable})
+
         if float(ds.longitude.max()) > 180.0:
             ds = ds.assign_coords(longitude=((ds.longitude + 180) % 360) - 180)
-        if ds.latitude[0] > ds.latitude[-1]:
+        if float(ds.latitude[0]) > float(ds.latitude[-1]):
             ds = ds.sortby("latitude", ascending=True)
-        if ds.longitude[0] > ds.longitude[-1]:
+        if float(ds.longitude[0]) > float(ds.longitude[-1]):
             ds = ds.sortby("longitude", ascending=True)
 
         start = f"{args.start_year}-01-01"
@@ -168,18 +191,37 @@ def spei_prepare_monthly(args: argparse.Namespace) -> None:
         ds = ds.sel(time=slice(start, end))
         if ds.sizes.get("time", 0) == 0:
             raise ValueError(f"SPEI temporal crop {start} to {end} returned no data.")
-        ds_out = ds.interp(
-            latitude=np.sort(TARGET_LAT_DESC),
-            longitude=TARGET_LON_ASC,
-            method=args.method,
-        ).sortby("latitude", ascending=False)
-        for var in ds_out.data_vars:
-            if var != args.variable:
-                ds_out = ds_out.rename({var: args.variable}) if len(ds_out.data_vars) == 1 else ds_out
-                break
+
+        target_lat_asc = np.sort(TARGET_LAT_DESC)
+        source_lat = ds.latitude.values.astype("float32")
+        source_lon = ds.longitude.values.astype("float32")
+        already_on_target_grid = (
+            source_lat.shape == target_lat_asc.shape
+            and source_lon.shape == TARGET_LON_ASC.shape
+            and np.allclose(source_lat, target_lat_asc)
+            and np.allclose(source_lon, TARGET_LON_ASC)
+        )
+        if already_on_target_grid:
+            ds_out = ds.sortby("latitude", ascending=False)
+        else:
+            try:
+                ds_out = ds.interp(
+                    latitude=target_lat_asc,
+                    longitude=TARGET_LON_ASC,
+                    method=args.method,
+                ).sortby("latitude", ascending=False)
+            except ImportError as exc:
+                raise ImportError(
+                    "SPEI regridding with xarray.interp requires scipy. "
+                    "Install updated requirements with: "
+                    "python -m pip install -r workflows/data_foundation/requirements.txt"
+                ) from exc
+
         for var in ds_out.data_vars:
             if np.issubdtype(ds_out[var].dtype, np.floating):
                 ds_out[var] = ds_out[var].astype("float32")
+        ds_out[args.variable].attrs.update(ds[args.variable].attrs)
+        ds_out[args.variable].attrs["source_variable"] = source_var
         ds_out.attrs.update(ds.attrs)
         ds_out.attrs["temporal_resolution"] = "monthly"
         ds_out.attrs["spatial_resolution"] = "0.5 degree"
