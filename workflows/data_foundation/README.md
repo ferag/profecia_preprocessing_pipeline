@@ -50,6 +50,10 @@ resources/source_data/lai_h5gz
 
 or update `products.lai.input_dir` in the YAML config.
 
+By default `products.lai.enabled` is `auto`: LAI is included only when that
+folder exists and contains `.h5.gz` files. Set it to `true` to require LAI and
+fail if inputs are missing, or `false` to skip it explicitly.
+
 ## Python Environment
 
 This pipeline does not depend on Conda. It uses the active Python environment.

@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 
 config.setdefault("user_settings", "")
@@ -11,6 +12,15 @@ variables = config["variables"]
 selected_variables = config.get("selected_variables", list(variables.keys()))
 products = config.get("products", {})
 
+
+def config_bool(value):
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.lower() in {"1", "true", "yes", "y", "on"}
+    return bool(value)
+
+
 RELEASE_ID = release["id"]
 BASE_DIR = release["base_dir"]
 START_YEAR = int(period["start_year"])
@@ -20,7 +30,7 @@ ERA5_VARIABLES = selected_variables
 
 derived_config = products.get("derived", {})
 DERIVED_VARIABLES = []
-if derived_config.get("enabled", True):
+if config_bool(derived_config.get("enabled", True)):
     selected = set(ERA5_VARIABLES)
     if {"t2m", "d2m"}.issubset(selected):
         DERIVED_VARIABLES.append("vpd")
@@ -31,14 +41,20 @@ if derived_config.get("enabled", True):
 
 spei_config = products.get("spei", {})
 SPEI_SCALES = [f"{int(scale):02d}" for scale in spei_config.get("scales", [1, 2, 3, 6, 9, 12, 24])]
-SPEI_VARIABLES = [f"spei{scale}" for scale in SPEI_SCALES] if spei_config.get("enabled", True) else []
+SPEI_VARIABLES = [f"spei{scale}" for scale in SPEI_SCALES] if config_bool(spei_config.get("enabled", True)) else []
 
 lai_config = products.get("lai", {})
-LAI_VARIABLES = ["lai"] if lai_config.get("enabled", True) else []
 LAI_INPUT_DIR = lai_config.get("input_dir", f"{BASE_DIR}/raw/lai/source_h5gz")
+lai_enabled_setting = lai_config.get("enabled", "auto")
+if lai_enabled_setting == "auto":
+    lai_input_path = Path(LAI_INPUT_DIR)
+    LAI_ENABLED = lai_input_path.exists() and any(lai_input_path.glob("*.h5.gz"))
+else:
+    LAI_ENABLED = config_bool(lai_enabled_setting)
+LAI_VARIABLES = ["lai"] if LAI_ENABLED else []
 
 co2_config = products.get("co2", {})
-CO2_VARIABLES = co2_config.get("variables", ["co2_surface", "co2_column"]) if co2_config.get("enabled", True) else []
+CO2_VARIABLES = co2_config.get("variables", ["co2_surface", "co2_column"]) if config_bool(co2_config.get("enabled", True)) else []
 
 FINAL_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_VARIABLES + CO2_VARIABLES
 

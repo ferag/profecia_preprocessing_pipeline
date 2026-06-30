@@ -141,7 +141,9 @@ products:
       spei24: {long_name: SPEI 24-month, source_variable: spei24, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
 
   lai:
-    enabled: true
+    # auto includes LAI only when input_dir exists and contains .h5.gz files.
+    # Use true to require LAI, or false to skip it explicitly.
+    enabled: auto
     # Local folder containing THEIA GEOV2-GCM AVHRR LAI .h5.gz files.
     input_dir: resources/source_data/lai_h5gz
     metadata:
