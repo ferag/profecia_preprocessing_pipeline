@@ -156,6 +156,8 @@ rule prepare_spei_monthly:
 
 
 rule prepare_lai_monthly:
+    input:
+        marker=lai_download_marker
     output:
         monthly=f"{BASE_DIR}/monthly/lai_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
     params:
@@ -169,6 +171,29 @@ rule prepare_lai_monthly:
           --output {output.monthly} \
           --start-year {START_YEAR} \
           --end-year {END_YEAR}
+        """
+
+
+rule download_lai_files:
+    output:
+        marker=f"{BASE_DIR}/work/lai/download_complete.txt"
+    params:
+        output_dir=LAI_INPUT_DIR,
+        url_template=lai_download_config.get("url_template", ""),
+        base_url=lai_download_config.get("base_url", ""),
+        version=lai_download_config.get("version", "R03"),
+        extensions=",".join(lai_download_config.get("extensions", [".h5.gz", ".h5"]))
+    shell:
+        """
+        python3 {SCRIPT_DIR}/run_product_step.py lai-download \
+          --output-dir {params.output_dir} \
+          --marker {output.marker} \
+          --start-year {START_YEAR} \
+          --end-year {END_YEAR} \
+          --url-template "{params.url_template}" \
+          --base-url "{params.base_url}" \
+          --version {params.version} \
+          --extensions "{params.extensions}"
         """
 
 

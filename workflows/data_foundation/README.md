@@ -54,6 +54,32 @@ By default `products.lai.enabled` is `auto`: LAI is included only when that
 folder exists and contains `.h5.gz` files. Set it to `true` to require LAI and
 fail if inputs are missing, or `false` to skip it explicitly.
 
+The THEIA GEOV2-GCM manual defines dekadal LAI products on days 05, 15, and 25
+with names like:
+
+```text
+THEIA_GEOV2-GCM_R03_AVHRR_LAI_YYYYMMDD.h5
+```
+
+It does not provide a stable direct HTTP endpoint in the manual. If you have a
+THEIA mirror or catalog URL that exposes direct files, enable the downloader:
+
+```yaml
+products:
+  lai:
+    enabled: auto
+    input_dir: resources/source_data/lai_h5gz
+    download:
+      enabled: true
+      url_template: "https://example.org/path/{filename}"
+      version: R03
+      extensions: [".h5.gz", ".h5"]
+```
+
+`url_template` supports `{filename}`, `{year}`, `{month}`, `{day}`, and
+`{yyyymmdd}`. Alternatively, set `base_url` when files are available directly as
+`<base_url>/<filename>`.
+
 ## Python Environment
 
 This pipeline does not depend on Conda. It uses the active Python environment.

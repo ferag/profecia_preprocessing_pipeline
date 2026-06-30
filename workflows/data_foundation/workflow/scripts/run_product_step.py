@@ -259,6 +259,24 @@ def lai_monthly(args: argparse.Namespace) -> None:
     shutil.move(str(tmp_output), args.output)
 
 
+def lai_download(args: argparse.Namespace) -> None:
+    from lai_pipeline import download_geov2_gcm_lai
+
+    extensions = [item.strip() for item in args.extensions.split(",") if item.strip()]
+    files = download_geov2_gcm_lai(
+        args.output_dir,
+        start_year=args.start_year,
+        end_year=args.end_year,
+        url_template=args.url_template or None,
+        base_url=args.base_url or None,
+        version=args.version,
+        extensions=extensions,
+        overwrite=args.overwrite,
+    )
+    ensure_parent(args.marker)
+    args.marker.write_text("\n".join(path.name for path in files) + "\n", encoding="utf-8")
+
+
 def co2_download(args: argparse.Namespace) -> None:
     from co2_pipeline import download_carbontracker_co2
 
@@ -367,6 +385,18 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--end-year", required=True, type=int)
     p.add_argument("--overwrite", action="store_true")
     p.set_defaults(func=lai_monthly)
+
+    p = sub.add_parser("lai-download")
+    p.add_argument("--output-dir", required=True, type=Path)
+    p.add_argument("--marker", required=True, type=Path)
+    p.add_argument("--start-year", required=True, type=int)
+    p.add_argument("--end-year", required=True, type=int)
+    p.add_argument("--url-template", default="")
+    p.add_argument("--base-url", default="")
+    p.add_argument("--version", default="R03")
+    p.add_argument("--extensions", default=".h5.gz,.h5")
+    p.add_argument("--overwrite", action="store_true")
+    p.set_defaults(func=lai_download)
 
     p = sub.add_parser("co2-download")
     p.add_argument("--output-dir", required=True, type=Path)

@@ -28,9 +28,14 @@ from typing import Iterable, Optional, Sequence
 import h5py
 import numpy as np
 import pandas as pd
+import requests
 import xarray as xr
 
 DEFAULT_INPUT_PATTERN = "THEIA_GEOV2-GCM_*_LAI_*.h5.gz"
+DEFAULT_INPUT_PATTERNS = (
+    "THEIA_GEOV2-GCM_*_LAI_*.h5.gz",
+    "THEIA_GEOV2-GCM_*_LAI_*.h5",
+)
 DEFAULT_VARIABLE_CANDIDATES = ("LAI", "/LAI/LAI", "Data/LAI", "AVHRR_LAI")
 
 DEFAULT_START_YEAR = 1982
@@ -46,6 +51,110 @@ DEFAULT_VALID_DN_MIN = 0
 DEFAULT_VALID_DN_MAX = 210
 DEFAULT_VALID_LAI_MIN = 0.0
 DEFAULT_VALID_LAI_MAX = 7.0
+
+
+def geov2_gcm_lai_dates(start_year: int, end_year: int) -> list[datetime]:
+    """Devuelve las fechas decadales del manual THEIA: días 05, 15 y 25."""
+    return [
+        datetime(year, month, day)
+        for year in range(start_year, end_year + 1)
+        for month in range(1, 13)
+        for day in (5, 15, 25)
+    ]
+
+
+def geov2_gcm_filename(date: datetime, version: str = "R03", extension: str = ".h5") -> str:
+    """
+    Construye nombres del manual: THEIA_GEOV2-GCM_Rnn_AVHRR_LAI_yyyymmdd.h5.
+    """
+    extension = extension if extension.startswith(".") else f".{extension}"
+    return f"THEIA_GEOV2-GCM_{version}_AVHRR_LAI_{date:%Y%m%d}{extension}"
+
+
+def _lai_download_url(
+    date: datetime,
+    filename: str,
+    url_template: str | None = None,
+    base_url: str | None = None,
+) -> str:
+    if url_template:
+        return url_template.format(
+            filename=filename,
+            year=date.year,
+            month=f"{date.month:02d}",
+            day=f"{date.day:02d}",
+            yyyymmdd=date.strftime("%Y%m%d"),
+        )
+    if base_url:
+        return base_url.rstrip("/") + "/" + filename
+    raise ValueError(
+        "LAI download needs products.lai.download.url_template or "
+        "products.lai.download.base_url. The THEIA manual documents file names "
+        "but does not provide a direct download endpoint."
+    )
+
+
+def download_geov2_gcm_lai(
+    output_dir: str | Path,
+    start_year: int = DEFAULT_START_YEAR,
+    end_year: int = DEFAULT_END_YEAR,
+    url_template: str | None = None,
+    base_url: str | None = None,
+    version: str = "R03",
+    extensions: Sequence[str] = (".h5.gz", ".h5"),
+    overwrite: bool = False,
+    timeout: int = 120,
+) -> list[Path]:
+    """
+    Descarga GEOV2-GCM AVHRR LAI usando una URL configurable.
+
+    El manual THEIA-MU-44-381-CNES define el nombre de archivo y las fechas
+    decadales, pero no incluye un endpoint HTTP estable. Por eso el pipeline
+    recibe `url_template` o `base_url` desde la configuración.
+    """
+    output_dir = ensure_dir(output_dir)
+    downloaded: list[Path] = []
+
+    for date in geov2_gcm_lai_dates(start_year, end_year):
+        date_downloaded = False
+        last_error: Exception | None = None
+
+        for extension in extensions:
+            filename = geov2_gcm_filename(date, version=version, extension=extension)
+            output_path = output_dir / filename
+            if output_path.exists() and not overwrite:
+                downloaded.append(output_path)
+                date_downloaded = True
+                break
+
+            url = _lai_download_url(
+                date=date,
+                filename=filename,
+                url_template=url_template,
+                base_url=base_url,
+            )
+            try:
+                response = requests.get(url, stream=True, timeout=timeout)
+                if response.status_code == 404:
+                    continue
+                response.raise_for_status()
+                with output_path.open("wb") as handle:
+                    for chunk in response.iter_content(chunk_size=1024 * 1024):
+                        if chunk:
+                            handle.write(chunk)
+                downloaded.append(output_path)
+                date_downloaded = True
+                print(f"Descargado LAI: {filename}")
+                break
+            except requests.RequestException as exc:
+                last_error = exc
+                continue
+
+        if not date_downloaded:
+            detail = f" Último error: {last_error}" if last_error else ""
+            raise RuntimeError(f"No se pudo descargar LAI para {date:%Y-%m-%d}.{detail}")
+
+    return downloaded
 
 def ensure_dir(path: str | Path) -> Path:
     """Crea un directorio si no existe y devuelve un objeto Path."""
@@ -115,6 +224,14 @@ def unzip_h5gz(gzip_file: str | Path, output_dir: str | Path, overwrite: bool = 
         shutil.copyfileobj(f_in, f_out)
 
     return output_file
+
+
+def prepare_h5_input(input_file: str | Path, temp_dir: str | Path, overwrite: bool = False) -> Path:
+    """Devuelve un HDF5 legible, descomprimiendo solo si la entrada es `.gz`."""
+    input_file = Path(input_file)
+    if input_file.suffix == ".gz":
+        return unzip_h5gz(input_file, temp_dir, overwrite=overwrite)
+    return input_file
 
 
 def inspect_hdf5_structure(h5_file: str | Path) -> list[str]:
@@ -214,7 +331,7 @@ def validate_lai_grid_shape(
 
 def group_files_by_month(
     input_dir: str | Path,
-    input_pattern: str = DEFAULT_INPUT_PATTERN,
+    input_pattern: str | None = None,
     start_year: Optional[int] = DEFAULT_START_YEAR,
     end_year: Optional[int] = DEFAULT_END_YEAR,
 ) -> dict[str, list[Path]]:
@@ -226,7 +343,11 @@ def group_files_by_month(
     Diccionario `{YYYY-MM: [archivos decadales del mes]}`.
     """
     input_dir = Path(input_dir)
-    files = sorted(input_dir.glob(input_pattern))
+    patterns = [input_pattern] if input_pattern else list(DEFAULT_INPUT_PATTERNS)
+    files: list[Path] = []
+    for pattern in patterns:
+        files.extend(input_dir.glob(pattern))
+    files = sorted(set(files))
     files = filter_files_by_year(files, start_year=start_year, end_year=end_year)
 
     grouped: dict[str, list[Path]] = defaultdict(list)
@@ -272,8 +393,9 @@ def compute_monthly_lai(
     temp_files: list[Path] = []
 
     for gz_file in sorted(file_group):
-        h5_path = unzip_h5gz(gz_file, temp_dir, overwrite=overwrite)
-        temp_files.append(h5_path)
+        h5_path = prepare_h5_input(gz_file, temp_dir, overwrite=overwrite)
+        if h5_path != gz_file:
+            temp_files.append(h5_path)
 
         date = extract_date_from_filename(gz_file.name)
         timestamps.append(date)
@@ -339,7 +461,7 @@ def compute_monthly_lai(
 def process_monthly_lai(
     input_dir: str | Path,
     output_dir: str | Path,
-    input_pattern: str = DEFAULT_INPUT_PATTERN,
+    input_pattern: str | None = None,
     start_year: Optional[int] = DEFAULT_START_YEAR,
     end_year: Optional[int] = DEFAULT_END_YEAR,
     overwrite: bool = False,

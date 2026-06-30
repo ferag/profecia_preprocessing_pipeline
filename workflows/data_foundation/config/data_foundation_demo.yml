@@ -146,6 +146,17 @@ products:
     enabled: auto
     # Local folder containing THEIA GEOV2-GCM AVHRR LAI .h5.gz files.
     input_dir: resources/source_data/lai_h5gz
+    download:
+      enabled: false
+      # The THEIA manual defines names like
+      # THEIA_GEOV2-GCM_R03_AVHRR_LAI_YYYYMMDD.h5, but does not provide a
+      # stable HTTP endpoint. Set one of these if your THEIA mirror/catalog
+      # exposes direct file downloads.
+      # url_template supports: {filename}, {year}, {month}, {day}, {yyyymmdd}
+      url_template: ""
+      base_url: ""
+      version: R03
+      extensions: [".h5.gz", ".h5"]
     metadata:
       long_name: Leaf Area Index
       source_variable: lai

@@ -45,10 +45,15 @@ SPEI_VARIABLES = [f"spei{scale}" for scale in SPEI_SCALES] if config_bool(spei_c
 
 lai_config = products.get("lai", {})
 LAI_INPUT_DIR = lai_config.get("input_dir", f"{BASE_DIR}/raw/lai/source_h5gz")
+lai_download_config = lai_config.get("download", {})
+LAI_DOWNLOAD_ENABLED = config_bool(lai_download_config.get("enabled", False))
 lai_enabled_setting = lai_config.get("enabled", "auto")
 if lai_enabled_setting == "auto":
     lai_input_path = Path(LAI_INPUT_DIR)
-    LAI_ENABLED = lai_input_path.exists() and any(lai_input_path.glob("*.h5.gz"))
+    LAI_ENABLED = LAI_DOWNLOAD_ENABLED or (
+        lai_input_path.exists()
+        and (any(lai_input_path.glob("*.h5.gz")) or any(lai_input_path.glob("*.h5")))
+    )
 else:
     LAI_ENABLED = config_bool(lai_enabled_setting)
 LAI_VARIABLES = ["lai"] if LAI_ENABLED else []
@@ -100,6 +105,10 @@ def inspect_log(variable):
 
 def wildcard_regex(items):
     return "|".join(items) if items else "a^"
+
+
+def lai_download_marker(wildcards=None):
+    return f"{BASE_DIR}/work/lai/download_complete.txt" if LAI_DOWNLOAD_ENABLED else []
 
 
 REQUESTS = expand(
