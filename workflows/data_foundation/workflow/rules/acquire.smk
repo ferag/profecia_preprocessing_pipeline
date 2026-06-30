@@ -179,10 +179,17 @@ rule download_lai_files:
         marker=f"{BASE_DIR}/work/lai/download_complete.txt"
     params:
         output_dir=LAI_INPUT_DIR,
+        method=lai_download_config.get("method", "direct"),
         url_template=lai_download_config.get("url_template", ""),
         base_url=lai_download_config.get("base_url", ""),
         version=lai_download_config.get("version", "R03"),
-        extensions=",".join(lai_download_config.get("extensions", [".h5.gz", ".h5"]))
+        extensions=",".join(lai_download_config.get("extensions", [".h5.gz", ".h5"])),
+        stac_url=lai_download_config.get("stac_url", "https://geodes-portal.cnes.fr/api/stac"),
+        stac_collection=lai_download_config.get("stac_collection", "THEIA_POSTEL_VEGETATION_LAI"),
+        api_key_env=lai_download_config.get("api_key_env", "GEODES_API_KEY"),
+        auth_header=lai_download_config.get("auth_header", "Authorization"),
+        auth_scheme=lai_download_config.get("auth_scheme", "Bearer"),
+        user_settings=lambda wildcards: config.get("user_settings", "")
     shell:
         """
         python3 {SCRIPT_DIR}/run_product_step.py lai-download \
@@ -190,10 +197,17 @@ rule download_lai_files:
           --marker {output.marker} \
           --start-year {START_YEAR} \
           --end-year {END_YEAR} \
+          --method {params.method} \
           --url-template "{params.url_template}" \
           --base-url "{params.base_url}" \
           --version {params.version} \
-          --extensions "{params.extensions}"
+          --extensions "{params.extensions}" \
+          --stac-url "{params.stac_url}" \
+          --stac-collection "{params.stac_collection}" \
+          --api-key-env "{params.api_key_env}" \
+          --auth-header "{params.auth_header}" \
+          --auth-scheme "{params.auth_scheme}" \
+          --user-settings "{params.user_settings}"
         """
 
 

@@ -148,6 +148,15 @@ products:
     input_dir: resources/source_data/lai_h5gz
     download:
       enabled: false
+      # Use method: stac for GEODES. Credentials can be provided with the
+      # GEODES_API_KEY environment variable or geodes.api_key in
+      # user_settings.local.yml.
+      method: stac
+      stac_url: https://geodes-portal.cnes.fr/api/stac
+      stac_collection: THEIA_POSTEL_VEGETATION_LAI
+      api_key_env: GEODES_API_KEY
+      auth_header: Authorization
+      auth_scheme: Bearer
       # The THEIA manual defines names like
       # THEIA_GEOV2-GCM_R03_AVHRR_LAI_YYYYMMDD.h5, but does not provide a
       # stable HTTP endpoint. Set one of these if your THEIA mirror/catalog

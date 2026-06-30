@@ -7,6 +7,7 @@ import argparse
 import shutil
 import sys
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 import xarray as xr
@@ -17,6 +18,23 @@ TARGET_LON_ASC = np.arange(-180.0, 180.0, 0.5, dtype="float32")
 
 def ensure_parent(path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+
+
+def load_user_settings(path: Path | None) -> dict[str, Any]:
+    if not path:
+        return {}
+    if str(path) in {"", "."}:
+        return {}
+    if path.is_dir():
+        return {}
+    if not path.exists():
+        raise FileNotFoundError(f"User settings file does not exist: {path}")
+    try:
+        import yaml
+    except ImportError as exc:
+        raise ImportError("PyYAML is required to read user_settings.local.yml.") from exc
+    with path.open("r", encoding="utf-8") as handle:
+        return yaml.safe_load(handle) or {}
 
 
 def standardize_coords(ds: xr.Dataset) -> xr.Dataset:
@@ -260,19 +278,42 @@ def lai_monthly(args: argparse.Namespace) -> None:
 
 
 def lai_download(args: argparse.Namespace) -> None:
-    from lai_pipeline import download_geov2_gcm_lai
+    from lai_pipeline import download_geodes_lai_from_stac, download_geov2_gcm_lai
 
+    settings = load_user_settings(args.user_settings)
+    geodes_settings = settings.get("geodes", {})
     extensions = [item.strip() for item in args.extensions.split(",") if item.strip()]
-    files = download_geov2_gcm_lai(
-        args.output_dir,
-        start_year=args.start_year,
-        end_year=args.end_year,
-        url_template=args.url_template or None,
-        base_url=args.base_url or None,
-        version=args.version,
-        extensions=extensions,
-        overwrite=args.overwrite,
-    )
+    api_key = args.api_key or geodes_settings.get("api_key")
+    api_key_env = args.api_key_env or geodes_settings.get("api_key_env") or "GEODES_API_KEY"
+    auth_header = args.auth_header or geodes_settings.get("auth_header") or "Authorization"
+    auth_scheme = args.auth_scheme
+    if auth_scheme is None:
+        auth_scheme = geodes_settings.get("auth_scheme", "Bearer")
+
+    if args.method == "stac":
+        files = download_geodes_lai_from_stac(
+            args.output_dir,
+            start_year=args.start_year,
+            end_year=args.end_year,
+            stac_url=args.stac_url,
+            collection=args.stac_collection,
+            api_key=api_key,
+            api_key_env=api_key_env,
+            auth_header=auth_header,
+            auth_scheme=auth_scheme,
+            overwrite=args.overwrite,
+        )
+    else:
+        files = download_geov2_gcm_lai(
+            args.output_dir,
+            start_year=args.start_year,
+            end_year=args.end_year,
+            url_template=args.url_template or None,
+            base_url=args.base_url or None,
+            version=args.version,
+            extensions=extensions,
+            overwrite=args.overwrite,
+        )
     ensure_parent(args.marker)
     args.marker.write_text("\n".join(path.name for path in files) + "\n", encoding="utf-8")
 
@@ -391,10 +432,18 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--marker", required=True, type=Path)
     p.add_argument("--start-year", required=True, type=int)
     p.add_argument("--end-year", required=True, type=int)
+    p.add_argument("--method", default="direct", choices=["direct", "stac"])
     p.add_argument("--url-template", default="")
     p.add_argument("--base-url", default="")
     p.add_argument("--version", default="R03")
     p.add_argument("--extensions", default=".h5.gz,.h5")
+    p.add_argument("--stac-url", default="https://geodes-portal.cnes.fr/api/stac")
+    p.add_argument("--stac-collection", default="THEIA_POSTEL_VEGETATION_LAI")
+    p.add_argument("--api-key", default="")
+    p.add_argument("--api-key-env", default="")
+    p.add_argument("--auth-header", default="")
+    p.add_argument("--auth-scheme")
+    p.add_argument("--user-settings", type=Path)
     p.add_argument("--overwrite", action="store_true")
     p.set_defaults(func=lai_download)
 

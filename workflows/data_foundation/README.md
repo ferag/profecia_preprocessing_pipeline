@@ -1,8 +1,9 @@
 # PROFECIA Pipeline 1: Data Foundation
 
 This directory contains a Snakemake data-foundation pipeline for PROFECIA. It
-downloads and prepares ERA5/CDS variables, derived predictors, SPEI, local LAI
-inputs, and CarbonTracker CO2 products, then writes release metadata.
+downloads and prepares ERA5/CDS variables, derived predictors, SPEI, LAI
+inputs from local files or GEODES, and CarbonTracker CO2 products, then writes
+release metadata.
 
 ## What This Pipeline Downloads
 
@@ -24,7 +25,7 @@ It also prepares configured derived/external products:
 
 - `vpd`, `wind_speed`, `swc_sub`
 - `spei01`, `spei02`, `spei03`, `spei06`, `spei09`, `spei12`, `spei24`
-- `lai` from local THEIA GEOV2-GCM `.h5.gz` inputs
+- `lai` from local or downloaded THEIA GEOV2/GEOV2-GCM `.h5.gz` inputs
 - `co2_surface`, `co2_column` from CarbonTracker
 
 These products are configured in:
@@ -41,8 +42,9 @@ resources/data_releases/profecia_inputs_era5_monthly_1982_2022/
 
 ## LAI Input
 
-LAI is not downloaded automatically. Place the THEIA GEOV2-GCM AVHRR LAI
-`.h5.gz` files in the configured local folder:
+LAI can be prepared from local THEIA GEOV2/GEOV2-GCM AVHRR `.h5.gz` files or
+downloaded from the GEODES STAC catalog. For local inputs, place the files in
+the configured folder:
 
 ```text
 resources/source_data/lai_h5gz
@@ -51,7 +53,8 @@ resources/source_data/lai_h5gz
 or update `products.lai.input_dir` in the YAML config.
 
 By default `products.lai.enabled` is `auto`: LAI is included only when that
-folder exists and contains `.h5.gz` files. Set it to `true` to require LAI and
+folder exists and contains `.h5.gz`/`.h5` files, or when
+`products.lai.download.enabled` is `true`. Set it to `true` to require LAI and
 fail if inputs are missing, or `false` to skip it explicitly.
 
 The THEIA GEOV2-GCM manual defines dekadal LAI products on days 05, 15, and 25
@@ -61,8 +64,8 @@ with names like:
 THEIA_GEOV2-GCM_R03_AVHRR_LAI_YYYYMMDD.h5
 ```
 
-It does not provide a stable direct HTTP endpoint in the manual. If you have a
-THEIA mirror or catalog URL that exposes direct files, enable the downloader:
+GEODES exposes the LAI assets through STAC collection
+`THEIA_POSTEL_VEGETATION_LAI`. Enable download like this:
 
 ```yaml
 products:
@@ -71,6 +74,36 @@ products:
     input_dir: resources/source_data/lai_h5gz
     download:
       enabled: true
+      method: stac
+      stac_url: https://geodes-portal.cnes.fr/api/stac
+      stac_collection: THEIA_POSTEL_VEGETATION_LAI
+      api_key_env: GEODES_API_KEY
+      auth_header: Authorization
+      auth_scheme: Bearer
+```
+
+Provide the GEODES API key either with an environment variable:
+
+```bash
+export GEODES_API_KEY="replace-with-your-geodes-api-key"
+```
+
+or in the ignored local settings file:
+
+```yaml
+geodes:
+  api_key: "replace-with-your-geodes-api-key"
+```
+
+The older direct downloader remains available for mirrors that expose direct
+files:
+
+```yaml
+products:
+  lai:
+    download:
+      enabled: true
+      method: direct
       url_template: "https://example.org/path/{filename}"
       version: R03
       extensions: [".h5.gz", ".h5"]

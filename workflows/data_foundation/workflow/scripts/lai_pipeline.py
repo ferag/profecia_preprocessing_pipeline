@@ -23,7 +23,8 @@ import shutil
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable, Optional, Sequence
+from typing import Any, Iterable, Optional, Sequence
+from urllib.parse import urlencode, urljoin
 
 import h5py
 import numpy as np
@@ -35,6 +36,8 @@ DEFAULT_INPUT_PATTERN = "THEIA_GEOV2-GCM_*_LAI_*.h5.gz"
 DEFAULT_INPUT_PATTERNS = (
     "THEIA_GEOV2-GCM_*_LAI_*.h5.gz",
     "THEIA_GEOV2-GCM_*_LAI_*.h5",
+    "THEIA_GEOV2_*_LAI_*.h5.gz",
+    "THEIA_GEOV2_*_LAI_*.h5",
 )
 DEFAULT_VARIABLE_CANDIDATES = ("LAI", "/LAI/LAI", "Data/LAI", "AVHRR_LAI")
 
@@ -51,6 +54,9 @@ DEFAULT_VALID_DN_MIN = 0
 DEFAULT_VALID_DN_MAX = 210
 DEFAULT_VALID_LAI_MIN = 0.0
 DEFAULT_VALID_LAI_MAX = 7.0
+
+DEFAULT_GEODES_STAC_URL = "https://geodes-portal.cnes.fr/api/stac"
+DEFAULT_GEODES_LAI_COLLECTION = "THEIA_POSTEL_VEGETATION_LAI"
 
 
 def geov2_gcm_lai_dates(start_year: int, end_year: int) -> list[datetime]:
@@ -92,6 +98,155 @@ def _lai_download_url(
         "products.lai.download.base_url. The THEIA manual documents file names "
         "but does not provide a direct download endpoint."
     )
+
+
+def _auth_headers(
+    api_key: str | None = None,
+    api_key_env: str | None = None,
+    auth_header: str = "Authorization",
+    auth_scheme: str = "Bearer",
+) -> dict[str, str]:
+    token = api_key or (os.environ.get(api_key_env) if api_key_env else None)
+    if not token:
+        return {}
+    value = token if not auth_scheme else f"{auth_scheme} {token}"
+    return {auth_header: value}
+
+
+def _request_json(
+    session: requests.Session,
+    url: str,
+    headers: dict[str, str],
+    timeout: int,
+) -> dict[str, Any]:
+    response = session.get(url, headers=headers, timeout=timeout)
+    response.raise_for_status()
+    return response.json()
+
+
+def _geodes_items_url(stac_url: str, collection: str, limit: int = 500) -> str:
+    base = stac_url.rstrip("/") + f"/collections/{collection}/items"
+    return base + "?" + urlencode({"limit": limit})
+
+
+def _next_link(payload: dict[str, Any]) -> str | None:
+    for link in payload.get("links", []):
+        if link.get("rel") == "next" and link.get("href"):
+            return str(link["href"])
+    return None
+
+
+def _asset_date(asset_name: str) -> datetime | None:
+    match = re.search(r"LAI_(\d{8})\.h5(?:\.gz)?$", asset_name)
+    if not match:
+        return None
+    return datetime.strptime(match.group(1), "%Y%m%d")
+
+
+def _collect_geodes_lai_assets(
+    stac_url: str,
+    collection: str,
+    start_year: int,
+    end_year: int,
+    headers: dict[str, str],
+    timeout: int,
+) -> dict[str, dict[str, str]]:
+    session = requests.Session()
+    url = _geodes_items_url(stac_url, collection)
+    assets_by_date: dict[str, dict[str, str]] = {}
+
+    while url:
+        payload = _request_json(session, url, headers=headers, timeout=timeout)
+        for feature in payload.get("features", []):
+            for asset_name, asset in feature.get("assets", {}).items():
+                date = _asset_date(asset_name)
+                if date is None or date.year < start_year or date.year > end_year:
+                    continue
+                href = asset.get("href")
+                if not href:
+                    continue
+                key = date.strftime("%Y%m%d")
+                current = assets_by_date.get(key)
+                candidate = {
+                    "name": asset.get("title") or asset_name,
+                    "href": urljoin(stac_url, href),
+                }
+                # Prefer the GEOV2-GCM product over older GEOV2 assets if both exist.
+                if current is None or (
+                    "GEOV2-GCM" in candidate["name"] and "GEOV2-GCM" not in current["name"]
+                ):
+                    assets_by_date[key] = candidate
+        url = _next_link(payload)
+
+    return assets_by_date
+
+
+def download_geodes_lai_from_stac(
+    output_dir: str | Path,
+    start_year: int = DEFAULT_START_YEAR,
+    end_year: int = DEFAULT_END_YEAR,
+    stac_url: str = DEFAULT_GEODES_STAC_URL,
+    collection: str = DEFAULT_GEODES_LAI_COLLECTION,
+    api_key: str | None = None,
+    api_key_env: str | None = "GEODES_API_KEY",
+    auth_header: str = "Authorization",
+    auth_scheme: str = "Bearer",
+    overwrite: bool = False,
+    timeout: int = 120,
+) -> list[Path]:
+    """Descarga LAI desde el catálogo STAC de GEODES."""
+    output_dir = ensure_dir(output_dir)
+    headers = _auth_headers(
+        api_key=api_key,
+        api_key_env=api_key_env,
+        auth_header=auth_header,
+        auth_scheme=auth_scheme,
+    )
+    assets = _collect_geodes_lai_assets(
+        stac_url=stac_url,
+        collection=collection,
+        start_year=start_year,
+        end_year=end_year,
+        headers=headers,
+        timeout=timeout,
+    )
+    if not assets:
+        raise RuntimeError(
+            f"No LAI assets found in GEODES STAC collection {collection} "
+            f"for {start_year}-{end_year}."
+        )
+
+    downloaded: list[Path] = []
+    session = requests.Session()
+    for date in geov2_gcm_lai_dates(start_year, end_year):
+        key = date.strftime("%Y%m%d")
+        asset = assets.get(key)
+        if asset is None:
+            raise RuntimeError(f"No GEODES LAI asset found for {date:%Y-%m-%d}.")
+
+        output_path = output_dir / asset["name"]
+        if output_path.exists() and not overwrite:
+            downloaded.append(output_path)
+            continue
+
+        response = session.get(asset["href"], headers=headers, stream=True, timeout=timeout)
+        try:
+            response.raise_for_status()
+        except requests.HTTPError as exc:
+            message = response.text[:500]
+            raise RuntimeError(
+                f"GEODES LAI download failed for {date:%Y-%m-%d} "
+                f"({response.status_code}). Response: {message}"
+            ) from exc
+
+        with output_path.open("wb") as handle:
+            for chunk in response.iter_content(chunk_size=1024 * 1024):
+                if chunk:
+                    handle.write(chunk)
+        downloaded.append(output_path)
+        print(f"Descargado LAI desde GEODES: {output_path.name}")
+
+    return downloaded
 
 
 def download_geov2_gcm_lai(

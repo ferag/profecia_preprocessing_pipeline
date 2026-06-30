@@ -17,3 +17,13 @@ cds:
   # Optional label for your own notes when you manage more than one CDS setup.
   # The pipeline does not send this value to CDS.
   profile_name: "default"
+
+geodes:
+  # GEODES API key for LAI downloads. Keep this private.
+  # You can also set this with the GEODES_API_KEY environment variable.
+  api_key: "replace-with-your-geodes-api-key"
+
+  # Defaults used by the GEODES LAI downloader.
+  api_key_env: "GEODES_API_KEY"
+  auth_header: "Authorization"
+  auth_scheme: "Bearer"
