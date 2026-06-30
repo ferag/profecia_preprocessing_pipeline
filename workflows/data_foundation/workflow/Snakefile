@@ -57,11 +57,13 @@ if lai_enabled_setting == "auto":
 else:
     LAI_ENABLED = config_bool(lai_enabled_setting)
 LAI_VARIABLES = ["lai"] if LAI_ENABLED else []
+LAI_SUPPORTED_VARIABLES = ["lai"] if lai_enabled_setting != "false" else []
 
 co2_config = products.get("co2", {})
 CO2_VARIABLES = co2_config.get("variables", ["co2_surface", "co2_column"]) if config_bool(co2_config.get("enabled", True)) else []
 
 FINAL_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_VARIABLES + CO2_VARIABLES
+SUPPORTED_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_SUPPORTED_VARIABLES + CO2_VARIABLES
 
 WORKFLOW_DIR = workflow.basedir
 SCRIPT_DIR = f"{WORKFLOW_DIR}/scripts"
@@ -144,6 +146,10 @@ for name in LAI_VARIABLES:
     FINAL_VARIABLE_METADATA[name] = lai_config.get("metadata", {})
 for name in CO2_VARIABLES:
     FINAL_VARIABLE_METADATA[name] = co2_config.get("variables_metadata", {}).get(name, {})
+
+SUPPORTED_VARIABLE_METADATA = dict(FINAL_VARIABLE_METADATA)
+for name in LAI_SUPPORTED_VARIABLES:
+    SUPPORTED_VARIABLE_METADATA.setdefault(name, lai_config.get("metadata", {}))
 
 VARIABLES_JSON = json.dumps(FINAL_VARIABLE_METADATA)
 DERIVED_OR_EXTERNAL_JSON = json.dumps(config.get("derived_or_external", {}))

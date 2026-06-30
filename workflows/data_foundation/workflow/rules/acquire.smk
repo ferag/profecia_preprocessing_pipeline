@@ -277,7 +277,7 @@ rule aggregate_monthly_to_annual:
     output:
         annual=f"{BASE_DIR}/annual/{{variable}}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc"
     wildcard_constraints:
-        variable=wildcard_regex(FINAL_VARIABLES)
+        variable=wildcard_regex(SUPPORTED_VARIABLES)
     params:
         aggregation=lambda wildcards: products.get("annual_aggregation", {}).get(wildcards.variable, "mean")
     shell:

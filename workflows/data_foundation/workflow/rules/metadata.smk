@@ -5,12 +5,12 @@ rule write_demo_croissant:
     output:
         croissant=f"{BASE_DIR}/fair/{{variable}}.croissant.jsonld"
     wildcard_constraints:
-        variable=wildcard_regex(FINAL_VARIABLES)
+        variable=wildcard_regex(SUPPORTED_VARIABLES)
     params:
         release_id=RELEASE_ID,
         year_range=f"{START_YEAR}-{END_YEAR}",
-        long_name=lambda wildcards: FINAL_VARIABLE_METADATA.get(wildcards.variable, {}).get("long_name", wildcards.variable),
-        source_unit=lambda wildcards: FINAL_VARIABLE_METADATA.get(wildcards.variable, {}).get("source_unit", "")
+        long_name=lambda wildcards: SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("long_name", wildcards.variable),
+        source_unit=lambda wildcards: SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("source_unit", "")
     shell:
         """
         python3 {SCRIPT_DIR}/write_demo_croissant.py \
