@@ -1,0 +1,19 @@
+# Copy this file to user_settings.local.yml and fill it with your local CDS
+# settings if you do not want to use environment variables or an external
+# ~/.cdsapirc file.
+#
+# This template is safe to commit. The matching *.local.yml files are ignored
+# by git and should contain your private values.
+
+cds:
+  # Copernicus Climate Data Store API URL.
+  # You can also set this with the CDSAPI_URL environment variable.
+  url: "https://cds.climate.copernicus.eu/api"
+
+  # CDS API key/token. Keep this private.
+  # You can also set this with the CDSAPI_KEY environment variable.
+  key: "replace-with-your-cds-api-key"
+
+  # Optional label for your own notes when you manage more than one CDS setup.
+  # The pipeline does not send this value to CDS.
+  profile_name: "default"

@@ -1,0 +1,141 @@
+import json
+
+
+config.setdefault("user_settings", "")
+config.setdefault("products", {})
+
+release = config["release"]
+period = config["period"]
+cds_defaults = config["cds_defaults"]
+variables = config["variables"]
+selected_variables = config.get("selected_variables", list(variables.keys()))
+products = config.get("products", {})
+
+RELEASE_ID = release["id"]
+BASE_DIR = release["base_dir"]
+START_YEAR = int(period["start_year"])
+END_YEAR = int(period["end_year"])
+YEARS = [str(year) for year in range(START_YEAR, END_YEAR + 1)]
+ERA5_VARIABLES = selected_variables
+
+derived_config = products.get("derived", {})
+DERIVED_VARIABLES = []
+if derived_config.get("enabled", True):
+    selected = set(ERA5_VARIABLES)
+    if {"t2m", "d2m"}.issubset(selected):
+        DERIVED_VARIABLES.append("vpd")
+    if {"u10", "v10"}.issubset(selected):
+        DERIVED_VARIABLES.append("wind_speed")
+    if {"swvl2", "swvl3"}.issubset(selected):
+        DERIVED_VARIABLES.append("swc_sub")
+
+spei_config = products.get("spei", {})
+SPEI_SCALES = [f"{int(scale):02d}" for scale in spei_config.get("scales", [1, 2, 3, 6, 9, 12, 24])]
+SPEI_VARIABLES = [f"spei{scale}" for scale in SPEI_SCALES] if spei_config.get("enabled", True) else []
+
+lai_config = products.get("lai", {})
+LAI_VARIABLES = ["lai"] if lai_config.get("enabled", True) else []
+LAI_INPUT_DIR = lai_config.get("input_dir", f"{BASE_DIR}/raw/lai/source_h5gz")
+
+co2_config = products.get("co2", {})
+CO2_VARIABLES = co2_config.get("variables", ["co2_surface", "co2_column"]) if co2_config.get("enabled", True) else []
+
+FINAL_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_VARIABLES + CO2_VARIABLES
+
+WORKFLOW_DIR = workflow.basedir
+SCRIPT_DIR = f"{WORKFLOW_DIR}/scripts"
+
+MANIFEST = f"{BASE_DIR}/manifest.json"
+CHECKSUMS = f"{BASE_DIR}/checksums.sha256"
+VALIDATE_LOG = f"{BASE_DIR}/logs/validate_release.log"
+
+
+def request_path(variable):
+    return f"{BASE_DIR}/metadata/cds_request_{variable}_{START_YEAR}_{END_YEAR}.json"
+
+
+def raw_path(variable):
+    return f"{BASE_DIR}/raw/era5/{variable}/{variable}_{START_YEAR}_{END_YEAR}_monthly_raw.nc"
+
+
+def monthly_path(variable):
+    return f"{BASE_DIR}/monthly/{variable}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
+
+
+def annual_path(variable):
+    return f"{BASE_DIR}/annual/{variable}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc"
+
+
+def validation_path(variable):
+    return f"{BASE_DIR}/validation/validation_report_{variable}.json"
+
+
+def croissant_path(variable):
+    return f"{BASE_DIR}/fair/{variable}.croissant.jsonld"
+
+
+def download_log(variable):
+    return f"{BASE_DIR}/logs/download_era5_{variable}_{START_YEAR}_{END_YEAR}.log"
+
+
+def inspect_log(variable):
+    return f"{BASE_DIR}/logs/inspect_{variable}_{START_YEAR}_{END_YEAR}.log"
+
+
+def wildcard_regex(items):
+    return "|".join(items) if items else "a^"
+
+
+REQUESTS = expand(
+    f"{BASE_DIR}/metadata/cds_request_{{variable}}_{START_YEAR}_{END_YEAR}.json",
+    variable=ERA5_VARIABLES,
+)
+RAW_NETCDFS = expand(
+    f"{BASE_DIR}/raw/era5/{{variable}}/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_raw.nc",
+    variable=ERA5_VARIABLES,
+)
+MONTHLY_NETCDFS = expand(
+    f"{BASE_DIR}/monthly/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc",
+    variable=FINAL_VARIABLES,
+)
+ANNUAL_NETCDFS = expand(
+    f"{BASE_DIR}/annual/{{variable}}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc",
+    variable=FINAL_VARIABLES,
+)
+VALIDATION_REPORTS = expand(
+    f"{BASE_DIR}/validation/validation_report_{{variable}}.json",
+    variable=FINAL_VARIABLES,
+)
+CROISSANTS = expand(f"{BASE_DIR}/fair/{{variable}}.croissant.jsonld", variable=FINAL_VARIABLES)
+
+FINAL_VARIABLE_METADATA = {}
+for name in ERA5_VARIABLES:
+    FINAL_VARIABLE_METADATA[name] = variables[name]
+for name in DERIVED_VARIABLES:
+    FINAL_VARIABLE_METADATA[name] = derived_config.get("variables", {}).get(name, {})
+for name in SPEI_VARIABLES:
+    FINAL_VARIABLE_METADATA[name] = spei_config.get("variables", {}).get(name, {})
+for name in LAI_VARIABLES:
+    FINAL_VARIABLE_METADATA[name] = lai_config.get("metadata", {})
+for name in CO2_VARIABLES:
+    FINAL_VARIABLE_METADATA[name] = co2_config.get("variables_metadata", {}).get(name, {})
+
+VARIABLES_JSON = json.dumps(FINAL_VARIABLE_METADATA)
+DERIVED_OR_EXTERNAL_JSON = json.dumps(config.get("derived_or_external", {}))
+
+
+include: "rules/acquire.smk"
+include: "rules/inspect.smk"
+include: "rules/metadata.smk"
+include: "rules/validate.smk"
+
+
+rule all:
+    input:
+        manifest=MANIFEST,
+        checksums=CHECKSUMS,
+        validation_reports=VALIDATION_REPORTS,
+        croissants=CROISSANTS,
+        monthly_netcdfs=MONTHLY_NETCDFS,
+        annual_netcdfs=ANNUAL_NETCDFS,
+        release_validation=VALIDATE_LOG

@@ -1,0 +1,11 @@
+snakemake
+cdsapi
+pyyaml
+xarray
+netcdf4
+h5netcdf
+numpy
+requests
+pandas
+h5py
+cftime

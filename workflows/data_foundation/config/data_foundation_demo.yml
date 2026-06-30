@@ -1,0 +1,207 @@
+release:
+  id: profecia_inputs_era5_monthly_1982_2022
+  base_dir: resources/data_releases/profecia_inputs_era5_monthly_1982_2022
+  status: demo-expanded
+
+period:
+  start_year: 1982
+  end_year: 2022
+
+cds_defaults:
+  dataset: reanalysis-era5-single-levels-monthly-means
+  product_type: monthly_averaged_reanalysis
+  months:
+    - "01"
+    - "02"
+    - "03"
+    - "04"
+    - "05"
+    - "06"
+    - "07"
+    - "08"
+    - "09"
+    - "10"
+    - "11"
+    - "12"
+  time:
+    - "00:00"
+  data_format: netcdf
+  download_format: unarchived
+
+variables:
+  t2m:
+    long_name: 2 metre temperature
+    cds_variable: 2m_temperature
+    source_unit: K
+    min_reasonable_value: 180
+    max_reasonable_value: 330
+  d2m:
+    long_name: 2 metre dewpoint temperature
+    cds_variable: 2m_dewpoint_temperature
+    source_unit: K
+    min_reasonable_value: 180
+    max_reasonable_value: 330
+  tp:
+    long_name: Total precipitation
+    cds_variable: total_precipitation
+    source_unit: m
+    min_reasonable_value: 0
+    max_reasonable_value: 2
+  pev:
+    long_name: Potential evaporation
+    cds_variable: potential_evaporation
+    source_unit: m
+    min_reasonable_value: -2
+    max_reasonable_value: 2
+  ssrd:
+    long_name: Surface solar radiation downwards
+    cds_variable: surface_solar_radiation_downwards
+    source_unit: J m**-2
+    min_reasonable_value: 0
+    max_reasonable_value: 400000000
+  swvl1:
+    long_name: Volumetric soil water layer 1
+    cds_variable: volumetric_soil_water_layer_1
+    source_unit: m**3 m**-3
+    min_reasonable_value: 0
+    max_reasonable_value: 1
+  swvl2:
+    long_name: Volumetric soil water layer 2
+    cds_variable: volumetric_soil_water_layer_2
+    source_unit: m**3 m**-3
+    min_reasonable_value: 0
+    max_reasonable_value: 1
+  swvl3:
+    long_name: Volumetric soil water layer 3
+    cds_variable: volumetric_soil_water_layer_3
+    source_unit: m**3 m**-3
+    min_reasonable_value: 0
+    max_reasonable_value: 1
+  tcc:
+    long_name: Total cloud cover
+    cds_variable: total_cloud_cover
+    source_unit: (0 - 1)
+    min_reasonable_value: 0
+    max_reasonable_value: 1
+  u10:
+    long_name: 10 metre U wind component
+    cds_variable: 10m_u_component_of_wind
+    source_unit: m s**-1
+    min_reasonable_value: -100
+    max_reasonable_value: 100
+  v10:
+    long_name: 10 metre V wind component
+    cds_variable: 10m_v_component_of_wind
+    source_unit: m s**-1
+    min_reasonable_value: -100
+    max_reasonable_value: 100
+
+# By default the pipeline targets every direct CDS variable above. To test a
+# smaller run, uncomment and edit this list.
+# selected_variables:
+#   - t2m
+#   - tp
+
+products:
+  annual_aggregation:
+    tp: mean
+
+  derived:
+    enabled: true
+    variables:
+      vpd:
+        long_name: Vapor Pressure Deficit
+        source_variable: vpd
+        source_unit: kPa
+        min_reasonable_value: 0
+        max_reasonable_value: 10
+      wind_speed:
+        long_name: 10 m wind speed
+        source_variable: wind_speed
+        source_unit: m s-1
+        min_reasonable_value: 0
+        max_reasonable_value: 100
+      swc_sub:
+        long_name: Sub-surface Soil Water Content
+        source_variable: swc_sub
+        source_unit: m3 m-3
+        min_reasonable_value: 0
+        max_reasonable_value: 1
+
+  spei:
+    enabled: true
+    scales: [1, 2, 3, 6, 9, 12, 24]
+    variables:
+      spei01: {long_name: SPEI 1-month, source_variable: spei01, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei02: {long_name: SPEI 2-month, source_variable: spei02, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei03: {long_name: SPEI 3-month, source_variable: spei03, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei06: {long_name: SPEI 6-month, source_variable: spei06, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei09: {long_name: SPEI 9-month, source_variable: spei09, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei12: {long_name: SPEI 12-month, source_variable: spei12, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+      spei24: {long_name: SPEI 24-month, source_variable: spei24, source_unit: "1", min_reasonable_value: -10, max_reasonable_value: 10}
+
+  lai:
+    enabled: true
+    # Local folder containing THEIA GEOV2-GCM AVHRR LAI .h5.gz files.
+    input_dir: resources/source_data/lai_h5gz
+    metadata:
+      long_name: Leaf Area Index
+      source_variable: lai
+      source_unit: m2 m-2
+      min_reasonable_value: 0
+      max_reasonable_value: 7
+
+  co2:
+    enabled: true
+    surface_level: 0
+    variables:
+      - co2_surface
+      - co2_column
+    variables_metadata:
+      co2_surface:
+        long_name: CarbonTracker surface CO2 mole fraction
+        source_variable: co2_surface
+        source_unit: ppm
+        min_reasonable_value: 250
+        max_reasonable_value: 600
+      co2_column:
+        long_name: CarbonTracker column-averaged CO2 mole fraction
+        source_variable: co2_column
+        source_unit: ppm
+        min_reasonable_value: 250
+        max_reasonable_value: 600
+
+derived_or_external:
+  vpd:
+    status: derived
+    note: Compute from t2m and d2m in a later harmonization step.
+  wind_speed:
+    status: derived
+    note: Compute as sqrt(u10^2 + v10^2) in a later harmonization step.
+  swc_sub:
+    status: derived
+    note: Define integration from soil layers before implementing.
+  spei01:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei02:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei03:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei06:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei09:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei12:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  spei24:
+    status: external
+    note: SPEI source and download endpoint are not specified in eda.md.
+  lai:
+    status: external
+    note: LAI source, product, and download endpoint are not specified in eda.md.
