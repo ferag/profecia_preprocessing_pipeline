@@ -10,3 +10,5 @@ pandas
 h5py
 cftime
 scipy
+rasterio
+rioxarray

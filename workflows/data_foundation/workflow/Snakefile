@@ -1,162 +1,235 @@
-import json
 from pathlib import Path
+import sys
 
 
 config.setdefault("user_settings", "")
-config.setdefault("products", {})
 
 release = config["release"]
-period = config["period"]
-cds_defaults = config["cds_defaults"]
-variables = config["variables"]
-selected_variables = config.get("selected_variables", list(variables.keys()))
-products = config.get("products", {})
-
-
-def config_bool(value):
-    if isinstance(value, bool):
-        return value
-    if isinstance(value, str):
-        return value.lower() in {"1", "true", "yes", "y", "on"}
-    return bool(value)
-
+sources = config["sources"]
+selected = config.get("selected_variables", [])
+derived = config.get("derived_products", [])
+canonical_refs = config.get("canonical_reference_products", {})
 
 RELEASE_ID = release["id"]
 BASE_DIR = release["base_dir"]
-START_YEAR = int(period["start_year"])
-END_YEAR = int(period["end_year"])
-YEARS = [str(year) for year in range(START_YEAR, END_YEAR + 1)]
-ERA5_VARIABLES = selected_variables
-
-derived_config = products.get("derived", {})
-DERIVED_VARIABLES = []
-if config_bool(derived_config.get("enabled", True)):
-    selected = set(ERA5_VARIABLES)
-    if {"t2m", "d2m"}.issubset(selected):
-        DERIVED_VARIABLES.append("vpd")
-    if {"u10", "v10"}.issubset(selected):
-        DERIVED_VARIABLES.append("wind_speed")
-    if {"swvl2", "swvl3"}.issubset(selected):
-        DERIVED_VARIABLES.append("swc_sub")
-
-spei_config = products.get("spei", {})
-SPEI_SCALES = [f"{int(scale):02d}" for scale in spei_config.get("scales", [1, 2, 3, 6, 9, 12, 24])]
-SPEI_VARIABLES = [f"spei{scale}" for scale in SPEI_SCALES] if config_bool(spei_config.get("enabled", True)) else []
-
-lai_config = products.get("lai", {})
-LAI_INPUT_DIR = lai_config.get("input_dir", f"{BASE_DIR}/raw/lai/source_h5gz")
-lai_download_config = lai_config.get("download", {})
-LAI_DOWNLOAD_ENABLED = config_bool(lai_download_config.get("enabled", False))
-lai_enabled_setting = lai_config.get("enabled", "auto")
-if lai_enabled_setting == "auto":
-    lai_input_path = Path(LAI_INPUT_DIR)
-    LAI_ENABLED = LAI_DOWNLOAD_ENABLED or (
-        lai_input_path.exists()
-        and (any(lai_input_path.glob("*.h5.gz")) or any(lai_input_path.glob("*.h5")))
-    )
-else:
-    LAI_ENABLED = config_bool(lai_enabled_setting)
-LAI_VARIABLES = ["lai"] if LAI_ENABLED else []
-LAI_SUPPORTED_VARIABLES = ["lai"] if lai_enabled_setting != "false" else []
-
-co2_config = products.get("co2", {})
-CO2_VARIABLES = co2_config.get("variables", ["co2_surface", "co2_column"]) if config_bool(co2_config.get("enabled", True)) else []
-
-FINAL_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_VARIABLES + CO2_VARIABLES
-SUPPORTED_VARIABLES = ERA5_VARIABLES + DERIVED_VARIABLES + SPEI_VARIABLES + LAI_SUPPORTED_VARIABLES + CO2_VARIABLES
-
 WORKFLOW_DIR = workflow.basedir
 SCRIPT_DIR = f"{WORKFLOW_DIR}/scripts"
+CONFIG_PATH = str(workflow.configfiles[0]) if workflow.configfiles else "workflows/data_foundation/config/data_foundation_demo.yml"
+PYTHON = sys.executable
+
+
+
+def derived_products():
+    return [item for item in derived if item.get("id") and item.get("output_filename")]
+
+
+def derived_output(item):
+    kind = str(item.get('temporal_resolution', 'monthly')).lower()
+    folder = 'annual' if kind == 'annual' else ('static' if kind == 'static' else 'monthly')
+    return f"{BASE_DIR}/{folder}/{item['output_filename']}"
+
+
+def selected_pairs():
+    return [(item["source"], item["variable"]) for item in selected]
+
+
+def source_config(source):
+    return sources[source]
+
+
+def variable_config(source, variable):
+    return sources[source]["variables"][variable]
+
+
+def canonical_reference(kind, variable):
+    return canonical_refs.get(f"{kind}/{variable}", "")
+
+
+def has_canonical_reference(kind, variable):
+    return bool(canonical_reference(kind, variable))
+
+
+def variable_has_canonical_reference(source, variable):
+    return bool(variable_config(source, variable).get("canonical_reference_path"))
+
+
+def skip_api_acquisition(source, variable):
+    if variable_has_canonical_reference(source, variable):
+        return True
+    if source == "carbontracker_co2" and variable == "co2" and has_canonical_reference("annual", "co2"):
+        return True
+    return False
+
+
+def static_monthly_source(variable):
+    if variable in {"ph", "bulk", "cec", "clay", "sand", "silt", "soc", "total_n"}:
+        return "resources/source_data/static/hwsd2_soil_0p5_100cm.nc"
+    return f"resources/source_data/static/{variable}_0.5deg.nc"
+
+
+def hwsd2_uses_canonical_reference():
+    return bool(sources.get("hwsd2", {}).get("canonical_reference_dir"))
+
+
+def access_mode(source):
+    return source_config(source).get("access_mode", "manual")
+
+
+def is_manual_mode(source):
+    return access_mode(source) in {"manual", "manual_or_internal"}
+
+
+def is_source_bundle(source):
+    return bool(source_config(source).get("data_files")) or access_mode(source) in {"usgs_authenticated"}
+
+
+def adapter(source):
+    return source_config(source).get("adapter", source)
+
+
+def request_path(source, variable):
+    return f"{BASE_DIR}/metadata/{source}/{variable}/request.json"
+
+
+def manual_inventory_path(source, variable):
+    return f"{BASE_DIR}/metadata/{source}/{variable}/manual_inventory.json"
+
+
+def raw_path(source, variable):
+    filename = variable_config(source, variable)["output_filename"]
+    return f"{BASE_DIR}/raw/{source}/{variable}/{filename}"
+
+
+def source_file_list_path(source):
+    return f"{BASE_DIR}/metadata/{source}/file_list.json"
+
+
+def source_download_report_path(source):
+    return f"{BASE_DIR}/metadata/{source}/download_report.json"
+
+
+def source_raw_dir(source):
+    return f"{BASE_DIR}/raw/{source}"
+
+
+def inspection_path(source, variable):
+    return f"{BASE_DIR}/validation/{source}/{variable}/inspection.json"
+
+
+def variable_temporal_kind(source, variable):
+    var = variable_config(source, variable)
+    text = " ".join(
+        str(var.get(key, "")).lower()
+        for key in ("data_structure", "dimensionality", "native_temporal_resolution")
+    )
+    filename = str(var.get("output_filename", "")).lower()
+    if "static" in text:
+        return "static"
+    if "annual" in text or "annual" in filename:
+        return "annual"
+    if "monthly" in text or "monthly" in filename or var.get("months"):
+        return "monthly"
+    return "static"
+
+
+def harmonized_monthly_path(source, variable):
+    return f"{BASE_DIR}/monthly/{source}_{variable}_monthly_0.5deg.nc"
+
+
+def harmonized_annual_path(source, variable):
+    return f"{BASE_DIR}/annual/{source}_{variable}_annual_0.5deg.nc"
+
+
+def harmonized_static_path(source):
+    if source == "hwsd2":
+        return f"{BASE_DIR}/static/hwsd2_soil_0.5deg.nc"
+    return f"{BASE_DIR}/static/{source}_static_0.5deg.nc"
+
+
+def harmonized_validation_path():
+    return f"{BASE_DIR}/validation/harmonized_validation.json"
+
+
+API_PAIRS = [
+    (source, variable)
+    for source, variable in selected_pairs()
+    if access_mode(source) in {"api", "http", "usgs_authenticated"} and not is_source_bundle(source)
+    and not skip_api_acquisition(source, variable)
+]
+HARMONIZABLE_API_PAIRS = [
+    (source, variable)
+    for source, variable in selected_pairs()
+    if access_mode(source) in {"api", "http", "usgs_authenticated"} and not is_source_bundle(source)
+    and not (source == "carbontracker_co2" and variable == "co2" and has_canonical_reference("annual", "co2"))
+]
+MANUAL_PAIRS = [(source, variable) for source, variable in selected_pairs() if is_manual_mode(source)]
+BUNDLE_SOURCES = sorted(
+    {
+        source
+        for source, _ in selected_pairs()
+        if access_mode(source) in {"api", "http", "usgs_authenticated"} and is_source_bundle(source)
+    }
+)
+
+REQUESTS = [request_path(source, variable) for source, variable in API_PAIRS]
+RAW_OUTPUTS = [raw_path(source, variable) for source, variable in API_PAIRS]
+MANUAL_INVENTORIES = [manual_inventory_path(source, variable) for source, variable in MANUAL_PAIRS]
+BUNDLE_FILE_LISTS = [source_file_list_path(source) for source in BUNDLE_SOURCES]
+BUNDLE_DOWNLOAD_REPORTS = [source_download_report_path(source) for source in BUNDLE_SOURCES]
+BUNDLE_RAW_DIRS = [source_raw_dir(source) for source in BUNDLE_SOURCES]
+INSPECTIONS = [inspection_path(source, variable) for source, variable in API_PAIRS]
+
+HARMONIZED_MONTHLY_PAIRS = [
+    (source, variable)
+    for source, variable in HARMONIZABLE_API_PAIRS
+    if variable_temporal_kind(source, variable) == "monthly"
+]
+HARMONIZED_ANNUAL_PAIRS = [
+    (source, variable)
+    for source, variable in HARMONIZABLE_API_PAIRS
+    if variable_temporal_kind(source, variable) == "annual"
+]
+HARMONIZED_STATIC_SOURCES = sorted(
+    {
+        source
+        for source, variable in selected_pairs()
+        if variable_temporal_kind(source, variable) == "static" and is_source_bundle(source)
+    }
+)
+HARMONIZED_MONTHLY_OUTPUTS = [
+    harmonized_monthly_path(source, variable) for source, variable in HARMONIZED_MONTHLY_PAIRS
+]
+HARMONIZED_ANNUAL_OUTPUTS = [
+    harmonized_annual_path(source, variable) for source, variable in HARMONIZED_ANNUAL_PAIRS
+]
+HARMONIZED_STATIC_OUTPUTS = [
+    harmonized_static_path(source) for source in HARMONIZED_STATIC_SOURCES
+]
+DERIVED_OUTPUTS = [derived_output(item) for item in derived_products()]
+HARMONIZED_OUTPUTS = HARMONIZED_MONTHLY_OUTPUTS + HARMONIZED_ANNUAL_OUTPUTS + HARMONIZED_STATIC_OUTPUTS + DERIVED_OUTPUTS
+HARMONIZED_VALIDATION = harmonized_validation_path()
 
 MANIFEST = f"{BASE_DIR}/manifest.json"
 CHECKSUMS = f"{BASE_DIR}/checksums.sha256"
-VALIDATE_LOG = f"{BASE_DIR}/logs/validate_release.log"
+CROISSANT = f"{BASE_DIR}/fair/harmonized_netcdf_demo.croissant.jsonld"
+RELEASE_VALIDATION = f"{BASE_DIR}/validation/release_validation.json"
+RO_CRATE_DIR = f"{BASE_DIR}/ro-crate"
+RO_CRATE_METADATA = f"{RO_CRATE_DIR}/ro-crate-metadata.json"
+RO_CRATE_README = f"{RO_CRATE_DIR}/README.md"
+RO_CRATE_ARCHIVE = f"{BASE_DIR}/ro-crate.zip"
 
 
-def request_path(variable):
-    return f"{BASE_DIR}/metadata/cds_request_{variable}_{START_YEAR}_{END_YEAR}.json"
+def wildcard_regex(values):
+    return "|".join(values) if values else "a^"
 
 
-def raw_path(variable):
-    return f"{BASE_DIR}/raw/era5/{variable}/{variable}_{START_YEAR}_{END_YEAR}_monthly_raw.nc"
-
-
-def monthly_path(variable):
-    return f"{BASE_DIR}/monthly/{variable}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
-
-
-def annual_path(variable):
-    return f"{BASE_DIR}/annual/{variable}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc"
-
-
-def validation_path(variable):
-    return f"{BASE_DIR}/validation/validation_report_{variable}.json"
-
-
-def croissant_path(variable):
-    return f"{BASE_DIR}/fair/{variable}.croissant.jsonld"
-
-
-def download_log(variable):
-    return f"{BASE_DIR}/logs/download_era5_{variable}_{START_YEAR}_{END_YEAR}.log"
-
-
-def inspect_log(variable):
-    return f"{BASE_DIR}/logs/inspect_{variable}_{START_YEAR}_{END_YEAR}.log"
-
-
-def wildcard_regex(items):
-    return "|".join(items) if items else "a^"
-
-
-def lai_download_marker(wildcards=None):
-    return f"{BASE_DIR}/work/lai/download_complete.txt" if LAI_DOWNLOAD_ENABLED else []
-
-
-REQUESTS = expand(
-    f"{BASE_DIR}/metadata/cds_request_{{variable}}_{START_YEAR}_{END_YEAR}.json",
-    variable=ERA5_VARIABLES,
-)
-RAW_NETCDFS = expand(
-    f"{BASE_DIR}/raw/era5/{{variable}}/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_raw.nc",
-    variable=ERA5_VARIABLES,
-)
-MONTHLY_NETCDFS = expand(
-    f"{BASE_DIR}/monthly/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc",
-    variable=FINAL_VARIABLES,
-)
-ANNUAL_NETCDFS = expand(
-    f"{BASE_DIR}/annual/{{variable}}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc",
-    variable=FINAL_VARIABLES,
-)
-VALIDATION_REPORTS = expand(
-    f"{BASE_DIR}/validation/validation_report_{{variable}}.json",
-    variable=FINAL_VARIABLES,
-)
-CROISSANTS = expand(f"{BASE_DIR}/fair/{{variable}}.croissant.jsonld", variable=FINAL_VARIABLES)
-
-FINAL_VARIABLE_METADATA = {}
-for name in ERA5_VARIABLES:
-    FINAL_VARIABLE_METADATA[name] = variables[name]
-for name in DERIVED_VARIABLES:
-    FINAL_VARIABLE_METADATA[name] = derived_config.get("variables", {}).get(name, {})
-for name in SPEI_VARIABLES:
-    FINAL_VARIABLE_METADATA[name] = spei_config.get("variables", {}).get(name, {})
-for name in LAI_VARIABLES:
-    FINAL_VARIABLE_METADATA[name] = lai_config.get("metadata", {})
-for name in CO2_VARIABLES:
-    FINAL_VARIABLE_METADATA[name] = co2_config.get("variables_metadata", {}).get(name, {})
-
-SUPPORTED_VARIABLE_METADATA = dict(FINAL_VARIABLE_METADATA)
-for name in LAI_SUPPORTED_VARIABLES:
-    SUPPORTED_VARIABLE_METADATA.setdefault(name, lai_config.get("metadata", {}))
-
-VARIABLES_JSON = json.dumps(FINAL_VARIABLE_METADATA)
-DERIVED_OR_EXTERNAL_JSON = json.dumps(config.get("derived_or_external", {}))
+SELECTED_SOURCES = sorted({source for source, _ in selected_pairs()})
+SELECTED_VARIABLES = sorted({variable for _, variable in selected_pairs()})
 
 
 include: "rules/acquire.smk"
 include: "rules/inspect.smk"
+include: "rules/harmonize.smk"
 include: "rules/metadata.smk"
 include: "rules/validate.smk"
 
@@ -165,8 +238,16 @@ rule all:
     input:
         manifest=MANIFEST,
         checksums=CHECKSUMS,
-        validation_reports=VALIDATION_REPORTS,
-        croissants=CROISSANTS,
-        monthly_netcdfs=MONTHLY_NETCDFS,
-        annual_netcdfs=ANNUAL_NETCDFS,
-        release_validation=VALIDATE_LOG
+        croissant=CROISSANT,
+        raw_outputs=RAW_OUTPUTS,
+        manual_inventories=MANUAL_INVENTORIES,
+        bundle_file_lists=BUNDLE_FILE_LISTS,
+        bundle_download_reports=BUNDLE_DOWNLOAD_REPORTS,
+        bundle_raw_dirs=BUNDLE_RAW_DIRS,
+        inspections=INSPECTIONS,
+        harmonized_outputs=HARMONIZED_OUTPUTS,
+        harmonized_validation=HARMONIZED_VALIDATION,
+        release_validation=RELEASE_VALIDATION,
+        ro_crate_metadata=RO_CRATE_METADATA,
+        ro_crate_readme=RO_CRATE_README,
+        ro_crate_archive=RO_CRATE_ARCHIVE

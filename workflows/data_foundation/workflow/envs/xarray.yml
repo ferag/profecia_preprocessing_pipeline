@@ -1,0 +1,11 @@
+name: profecia-data-foundation-xarray
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - xarray
+  - netcdf4
+  - numpy
+  - pyyaml
+  - rasterio
+  - rioxarray

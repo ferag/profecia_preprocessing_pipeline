@@ -1,4 +1,10 @@
 workflows/data_foundation/config/*.local.yml
+workflows/data_foundation/config/secrets.local.yml
+.env
+*.env
+notebooks/*
+secrets.yml
+credentials.yml
 resources/data_releases/
 resources/source_data/
 resources/**/*.nc
@@ -8,7 +14,6 @@ resources/**/*.zip
 resources/**/*.grib
 .snakemake/
 .venv/
-.env
 .env.*
 .gitrepo/
 __pycache__/

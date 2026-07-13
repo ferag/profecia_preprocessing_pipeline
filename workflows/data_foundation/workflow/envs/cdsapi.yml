@@ -1,0 +1,8 @@
+name: profecia-data-foundation-cdsapi
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.10
+  - cdsapi
+  - pyyaml
+  - requests

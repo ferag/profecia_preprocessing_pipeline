@@ -1,0 +1,3875 @@
+[
+  {
+    "key": "t2m",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_t2m_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/t2m_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "t2m",
+    "reference_var": "t2m",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 199.93072509765625,
+    "generated_max": 315.3494873046875,
+    "reference_min": 199.93072509765625,
+    "reference_max": 315.3494873046875
+  },
+  {
+    "key": "d2m",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_d2m_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/d2m_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "d2m",
+    "reference_var": "d2m",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 196.5419158935547,
+    "generated_max": 302.5137939453125,
+    "reference_min": 196.5419158935547,
+    "reference_max": 302.5137939453125
+  },
+  {
+    "key": "tp",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_tp_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/tp_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "tp",
+    "reference_var": "tp",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T06:00:00.000000000",
+        "last": "2022-12-01T06:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.0,
+    "generated_max": 0.15449142456054688,
+    "reference_min": 0.0,
+    "reference_max": 0.15449142456054688
+  },
+  {
+    "key": "pev",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_pev_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/pev_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "pev",
+    "reference_var": "pev",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T06:00:00.000000000",
+        "last": "2022-12-01T06:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": -0.015054546296596527,
+    "generated_max": 0.001227397471666336,
+    "reference_min": -0.015054546296596527,
+    "reference_max": 0.001227397471666336
+  },
+  {
+    "key": "ssrd",
+    "status": "OK_NUMERICALLY_EQUIVALENT",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_ssrd_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/ssrd_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "ssrd",
+    "reference_var": "ssrd",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T06:00:00.000000000",
+        "last": "2022-12-01T06:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526229,
+    "different_values": 171,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0001220703125,
+    "mean_abs_diff": 6.096434119169672e-10,
+    "rmse": 1.9449461694963982e-07,
+    "generated_min": -0.06134079769253731,
+    "generated_max": 40865792.0,
+    "reference_min": -0.06134079769253731,
+    "reference_max": 40865792.0,
+    "reason": "Finite differences are below numeric-equivalence thresholds."
+  },
+  {
+    "key": "swvl1",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_swvl1_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/swvl1_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "swvl1",
+    "reference_var": "swvl1",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 2.9802322387695312e-08,
+    "mean_abs_diff": 8.097764230517567e-11,
+    "rmse": 7.804512226491561e-10,
+    "generated_min": -0.0027298990171402693,
+    "generated_max": 0.7660050988197327,
+    "reference_min": -0.0027298990171402693,
+    "reference_max": 0.7660050988197327
+  },
+  {
+    "key": "swvl2",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_swvl2_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/swvl2_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "swvl2",
+    "reference_var": "swvl2",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 2.9802322387695312e-08,
+    "mean_abs_diff": 8.402815767159848e-11,
+    "rmse": 7.718636040071982e-10,
+    "generated_min": -0.0005637106951326132,
+    "generated_max": 0.7659796476364136,
+    "reference_min": -0.0005637106951326132,
+    "reference_max": 0.7659796476364136
+  },
+  {
+    "key": "swvl3",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_swvl3_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/swvl3_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "swvl3",
+    "reference_var": "swvl3",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 2.9802322387695312e-08,
+    "mean_abs_diff": 8.210790810282272e-11,
+    "rmse": 7.759197689425778e-10,
+    "generated_min": -0.00028351787477731705,
+    "generated_max": 0.7659403681755066,
+    "reference_min": -0.00028351694345474243,
+    "reference_max": 0.7659403681755066
+  },
+  {
+    "key": "tcc",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_tcc_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/tcc_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "tcc",
+    "reference_var": "tcc",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 2.9802322387695312e-08,
+    "mean_abs_diff": 8.667824707955682e-14,
+    "rmse": 4.0518357268569196e-11,
+    "generated_min": 0.0,
+    "generated_max": 1.000004768371582,
+    "reference_min": 0.0,
+    "reference_max": 1.000004768371582
+  },
+  {
+    "key": "u10",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_u10_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/u10_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "u10",
+    "reference_var": "u10",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": -17.827590942382812,
+    "generated_max": 16.193923950195312,
+    "reference_min": -17.827590942382812,
+    "reference_max": 16.193923950195312
+  },
+  {
+    "key": "v10",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/era5_single_levels_v10_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/v10_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "v10",
+    "reference_var": "v10",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": -15.887039184570312,
+    "generated_max": 20.36221694946289,
+    "reference_min": -15.887039184570312,
+    "reference_max": 20.36221694946289
+  },
+  {
+    "key": "spei01",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei01_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei01_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei01",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30188979,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 8.358710872584945e-10,
+    "rmse": 5.669302463630323e-09,
+    "generated_min": -8.207169532775879,
+    "generated_max": 6.798268795013428,
+    "reference_min": -8.207169532775879,
+    "reference_max": 6.798268795013428
+  },
+  {
+    "key": "spei02",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei02_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei02_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei02",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30215796,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 7.731077778392748e-10,
+    "rmse": 5.303011745902641e-09,
+    "generated_min": -7.068079471588135,
+    "generated_max": 7.06632137298584,
+    "reference_min": -7.068079471588135,
+    "reference_max": 7.06632137298584
+  },
+  {
+    "key": "spei03",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei03_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei03_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei03",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30224693,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 7.33171919571121e-10,
+    "rmse": 5.076843526396335e-09,
+    "generated_min": -6.874477863311768,
+    "generated_max": 6.78458833694458,
+    "reference_min": -6.874477863311768,
+    "reference_max": 6.78458833694458
+  },
+  {
+    "key": "spei06",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei06_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei06_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei06",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30228050,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 6.645247305345767e-10,
+    "rmse": 4.715347193102084e-09,
+    "generated_min": -6.931722640991211,
+    "generated_max": 6.425599575042725,
+    "reference_min": -6.931722640991211,
+    "reference_max": 6.425599575042725
+  },
+  {
+    "key": "spei09",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei09_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei09_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei09",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30228118,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 6.321129492051915e-10,
+    "rmse": 4.531945676049814e-09,
+    "generated_min": -6.5151824951171875,
+    "generated_max": 6.570267677307129,
+    "reference_min": -6.5151824951171875,
+    "reference_max": 6.570267677307129
+  },
+  {
+    "key": "spei12",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei12_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei12_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei12",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30228046,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 2.384185791015625e-07,
+    "mean_abs_diff": 6.199786201551062e-10,
+    "rmse": 4.469266842398789e-09,
+    "generated_min": -6.849201202392578,
+    "generated_max": 6.637454032897949,
+    "reference_min": -6.849201202392578,
+    "reference_max": 6.637454032897949
+  },
+  {
+    "key": "spei24",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/speibase_v211_spei24_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei24_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei24",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-16T00:00:00.000000000",
+        "last": "2022-12-16T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30223180,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 4.76837158203125e-07,
+    "mean_abs_diff": 6.253390423371096e-10,
+    "rmse": 4.485173864708085e-09,
+    "generated_min": -6.180072784423828,
+    "generated_max": 6.3046112060546875,
+    "reference_min": -6.180072784423828,
+    "reference_max": 6.3046112060546875
+  },
+  {
+    "key": "lai",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/lai_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/lai_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "lai",
+    "reference_var": "LAI",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30973655,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.0,
+    "generated_max": 6.0333333015441895,
+    "reference_min": 0.0,
+    "reference_max": 6.0333333015441895
+  },
+  {
+    "key": "swvl1-2",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/swvl1-2_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/swvl1-2_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "swvl1-2",
+    "reference_var": "swvl1-2",
+    "exact": false,
+    "derived_kind": "swvl1-2",
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 1.1920928955078125e-07,
+    "mean_abs_diff": 2.6351575929816743e-09,
+    "rmse": 8.30582716783716e-09,
+    "generated_min": -0.00015936065756250173,
+    "generated_max": 0.7655314207077026,
+    "reference_min": -0.00015936186537146568,
+    "reference_max": 0.7655313611030579
+  },
+  {
+    "key": "subswc",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/subswc_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/subswc_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "subswc",
+    "reference_var": "swc_sub",
+    "exact": false,
+    "derived_kind": "subswc",
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 1.1920928955078125e-07,
+    "mean_abs_diff": 2.497820698568017e-09,
+    "rmse": 7.991681622173963e-09,
+    "generated_min": -0.00017677831056062132,
+    "generated_max": 0.765865683555603,
+    "reference_min": -0.0001767782960087061,
+    "reference_max": 0.7658657431602478
+  },
+  {
+    "key": "wind",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/wind_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/wind_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "wind",
+    "reference_var": "wind_speed",
+    "exact": false,
+    "derived_kind": "wind",
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.00020567994215525687,
+    "generated_max": 20.55389404296875,
+    "reference_min": 0.00020567994215525687,
+    "reference_max": 20.55389404296875
+  },
+  {
+    "key": "vpd",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/vpd_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/vpd_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "vpd",
+    "reference_var": "vpd",
+    "exact": false,
+    "derived_kind": "vpd",
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 127526400,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 6.198883056640625e-06,
+    "mean_abs_diff": 2.1114519745636574e-07,
+    "rmse": 3.731823057691487e-07,
+    "generated_min": 0.00011900886602234095,
+    "generated_max": 7.730917453765869,
+    "reference_min": 0.00011900906974915415,
+    "reference_max": 7.730914115905762
+  },
+  {
+    "key": "spei06_univariable",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/spei06_univariable_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/spei06_univariable_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "spei06",
+    "reference_var": "spei",
+    "exact": false,
+    "derived_kind": null,
+    "note": null,
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 28200856,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 1.1920928955078125e-07,
+    "mean_abs_diff": 3.317994044447771e-10,
+    "rmse": 2.343930473419807e-09,
+    "generated_min": -6.487726211547852,
+    "generated_max": 6.190937519073486,
+    "reference_min": -6.487726211547852,
+    "reference_max": 6.190937519073486
+  },
+  {
+    "key": "bulk",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/bulk_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/bulk_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "bulk",
+    "reference_var": "bulk",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.12999999523162842,
+    "generated_max": 1.7940000295639038,
+    "reference_min": 0.12999999523162842,
+    "reference_max": 1.7940000295639038
+  },
+  {
+    "key": "cec",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/cec_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/cec_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "cec",
+    "reference_var": "cec",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 1.9163031578063965,
+    "generated_max": 93.8530044555664,
+    "reference_min": 1.9163031578063965,
+    "reference_max": 93.8530044555664
+  },
+  {
+    "key": "clay",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/clay_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/clay_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "clay",
+    "reference_var": "clay",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 3.700000762939453,
+    "generated_max": 57.099998474121094,
+    "reference_min": 3.700000762939453,
+    "reference_max": 57.099998474121094
+  },
+  {
+    "key": "elevation",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/elevation_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/elevation_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "elevation",
+    "reference_var": "elevation",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 10272960,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": -74.0,
+    "generated_max": 5594.0,
+    "reference_min": -74.0,
+    "reference_max": 5594.0
+  },
+  {
+    "key": "ph",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/ph_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/ph_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "ph",
+    "reference_var": "ph",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 4.300000190734863,
+    "generated_max": 8.65999984741211,
+    "reference_min": 4.300000190734863,
+    "reference_max": 8.65999984741211
+  },
+  {
+    "key": "richness",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/richness_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/richness_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "richness",
+    "reference_var": "richness",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 1768289,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 2.6534264087677,
+    "generated_max": 114.6114730834961,
+    "reference_min": 2.6534264087677,
+    "reference_max": 114.6114730834961
+  },
+  {
+    "key": "sand",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/sand_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/sand_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "sand",
+    "reference_var": "sand",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 12.399999618530273,
+    "generated_max": 90.4000015258789,
+    "reference_min": 12.399999618530273,
+    "reference_max": 90.4000015258789
+  },
+  {
+    "key": "silt",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/silt_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/silt_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "silt",
+    "reference_var": "silt",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 3.799999237060547,
+    "generated_max": 53.21361541748047,
+    "reference_min": 3.799999237060547,
+    "reference_max": 53.21361541748047
+  },
+  {
+    "key": "soc",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/soc_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/soc_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "soc",
+    "reference_var": "soc",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.1379999965429306,
+    "generated_max": 48.447837829589844,
+    "reference_min": 0.1379999965429306,
+    "reference_max": 48.447837829589844
+  },
+  {
+    "key": "total_n",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/monthly/total_n_1982_2022_monthly_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/total_n_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "total_n",
+    "reference_var": "total_n",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Reference is annual/static-like in monthly/soil; expanded to generated monthly years when needed.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 127526400,
+    "comparable_values": 30147792,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.11800000071525574,
+    "generated_max": 17.281999588012695,
+    "reference_min": 0.11800000071525574,
+    "reference_max": 17.281999588012695
+  },
+  {
+    "key": "co2_annual_human",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/annual/co2_1982_2022_annual_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/annual/human/co2_1982_2022_annual_0.5deg.nc",
+    "generated_var": "co2",
+    "reference_var": "co2",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Annual human reference uses time coordinate; generated may use year coordinate.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float64",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 10392270,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 1.52587890625e-05,
+    "mean_abs_diff": 7.633350084534737e-06,
+    "rmse": 1.0792389854899242e-05,
+    "generated_min": 338.091552734375,
+    "generated_max": 446.4642333984375,
+    "reference_min": 338.09156799316406,
+    "reference_max": 446.46421813964844
+  },
+  {
+    "key": "hfp_annual_human",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/annual/hfp_mu_hengl_hfp_annual_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/annual/human/hfp_1982_2022_annual_0.5deg.nc",
+    "generated_var": "hfp",
+    "reference_var": "hfp",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Annual human reference uses time coordinate; generated may use year coordinate.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 1894230,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": -0.13724273443222046,
+    "generated_max": 39.709476470947266,
+    "reference_min": -0.13724273443222046,
+    "reference_max": 39.709476470947266
+  },
+  {
+    "key": "ndep_annual_human",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/annual/ndep_tian2022_ndep_annual_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/annual/human/ndep_1982_2022_annual_0.5deg.nc",
+    "generated_var": "ndep",
+    "reference_var": "ndep",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Annual human reference uses time coordinate; generated may use year coordinate.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 2190958,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.0030900619458407164,
+    "generated_max": 9.225275993347168,
+    "reference_min": 0.0030900619458407164,
+    "reference_max": 9.225275993347168
+  },
+  {
+    "key": "tlu_annual_human",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/annual/tlu_1982_2022_annual_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/annual/human/tlu_1982_2022_annual_0.5deg.nc",
+    "generated_var": "tlu",
+    "reference_var": "tlu",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Annual human reference uses time coordinate; generated may use year coordinate.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "total_values": 10627200,
+    "comparable_values": 1991163,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.00041773990960791707,
+    "generated_max": 2056.294921875,
+    "reference_min": 0.00041773990960791707,
+    "reference_max": 2056.294921875
+  },
+  {
+    "key": "hwsd2_static_sand",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/sand_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "sand",
+    "reference_var": "sand",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 12.399999618530273,
+    "generated_max": 90.4000015258789,
+    "reference_min": 12.399999618530273,
+    "reference_max": 90.4000015258789
+  },
+  {
+    "key": "hwsd2_static_clay",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/clay_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "clay",
+    "reference_var": "clay",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 3.700000762939453,
+    "generated_max": 57.099998474121094,
+    "reference_min": 3.700000762939453,
+    "reference_max": 57.099998474121094
+  },
+  {
+    "key": "hwsd2_static_silt",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/silt_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "silt",
+    "reference_var": "silt",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 3.799999237060547,
+    "generated_max": 53.21361541748047,
+    "reference_min": 3.799999237060547,
+    "reference_max": 53.21361541748047
+  },
+  {
+    "key": "hwsd2_static_ph",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/ph_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "ph",
+    "reference_var": "ph",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 4.300000190734863,
+    "generated_max": 8.65999984741211,
+    "reference_min": 4.300000190734863,
+    "reference_max": 8.65999984741211
+  },
+  {
+    "key": "hwsd2_static_soc",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/soc_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "soc",
+    "reference_var": "soc",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.1379999965429306,
+    "generated_max": 48.447837829589844,
+    "reference_min": 0.1379999965429306,
+    "reference_max": 48.447837829589844
+  },
+  {
+    "key": "hwsd2_static_total_n",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/total_n_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "total_n",
+    "reference_var": "total_n",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      492,
+      360,
+      720
+    ],
+    "reference_shape": [
+      492,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 492,
+        "first": "1982-01-01T00:00:00.000000000",
+        "last": "2022-12-01T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 127526400,
+    "comparable_values": 30147792,
+    "equal_values": 127526400,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.11800000071525574,
+    "generated_max": 17.281999588012695,
+    "reference_min": 0.11800000071525574,
+    "reference_max": 17.281999588012695
+  },
+  {
+    "key": "hwsd2_static_bulk",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/bulk_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "bulk",
+    "reference_var": "bulk",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 0.12999999523162842,
+    "generated_max": 1.7940000295639038,
+    "reference_min": 0.12999999523162842,
+    "reference_max": 1.7940000295639038
+  },
+  {
+    "key": "hwsd2_static_cec",
+    "status": "OK",
+    "generated_path": "resources/data_releases/profecia_inputs_all_available_v0/static/hwsd2_soil_0.5deg.nc",
+    "reference_path": "/srv/read_only_data/final_datasets/monthly/soil/cec_1982_2022_monthly_0.5deg.nc",
+    "generated_var": "cec",
+    "reference_var": "cec",
+    "exact": false,
+    "derived_kind": null,
+    "note": "Generated is static 2D; reference is annual/static-like and compared by broadcasting over years.",
+    "generated_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "reference_dims": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "generated_shape": [
+      41,
+      360,
+      720
+    ],
+    "reference_shape": [
+      41,
+      360,
+      720
+    ],
+    "generated_dtype": "float32",
+    "reference_dtype": "float32",
+    "generated_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "reference_coords": {
+      "time": {
+        "size": 41,
+        "first": "1982-12-31T00:00:00.000000000",
+        "last": "2022-12-31T00:00:00.000000000"
+      },
+      "latitude": {
+        "size": 360,
+        "first": "89.5",
+        "last": "-90.0",
+        "median_step": -0.5
+      },
+      "longitude": {
+        "size": 720,
+        "first": "-180.0",
+        "last": "179.5",
+        "median_step": 0.5
+      }
+    },
+    "comparison_mode": "position",
+    "temporal_note": "Generated annual/static time expanded to reference time axis.",
+    "total_values": 10627200,
+    "comparable_values": 2512316,
+    "equal_values": 10627200,
+    "different_values": 0,
+    "nan_mask_different": 0,
+    "max_abs_diff": 0.0,
+    "mean_abs_diff": 0.0,
+    "rmse": 0.0,
+    "generated_min": 1.9163031578063965,
+    "generated_max": 93.8530044555664,
+    "reference_min": 1.9163031578063965,
+    "reference_max": 93.8530044555664
+  }
+]

@@ -1,303 +1,97 @@
-rule build_cds_request:
+rule build_request:
     output:
-        request=f"{BASE_DIR}/metadata/cds_request_{{variable}}_{START_YEAR}_{END_YEAR}.json"
+        request=f"{BASE_DIR}/metadata/{{source}}/{{variable}}/request.json"
     wildcard_constraints:
-        variable=wildcard_regex(ERA5_VARIABLES)
+        source=wildcard_regex([source for source, _ in API_PAIRS]),
+        variable=wildcard_regex([variable for _, variable in API_PAIRS])
     params:
-        dataset=lambda wildcards: variables[wildcards.variable].get(
-            "dataset", cds_defaults["dataset"]
-        ),
-        variable=lambda wildcards: variables[wildcards.variable]["cds_variable"],
-        years=",".join(YEARS),
-        months=",".join(cds_defaults["months"]),
-        time=",".join(cds_defaults["time"]),
-        data_format=cds_defaults["data_format"],
-        download_format=cds_defaults["download_format"],
-        extra_request_json=lambda wildcards: json.dumps(
-            {
-                "product_type": variables[wildcards.variable].get(
-                    "product_type", cds_defaults.get("product_type")
-                )
-            }
-        )
+        adapter=lambda wildcards: adapter(wildcards.source)
     shell:
         """
-        python3 {SCRIPT_DIR}/build_cds_request.py \
-          --dataset {params.dataset} \
-          --variable {params.variable} \
-          --years {params.years} \
-          --months {params.months} \
-          --time {params.time} \
-          --data-format {params.data_format} \
-          --download-format {params.download_format} \
-          --extra-request-json '{params.extra_request_json}' \
+        {PYTHON} {SCRIPT_DIR}/sources/{params.adapter}.py build-request \
+          --config {CONFIG_PATH} \
+          --source {wildcards.source} \
+          --variable {wildcards.variable} \
           --output {output.request}
         """
 
 
-rule download_era5_variable:
+rule download_api_variable:
     input:
-        request=lambda wildcards: request_path(wildcards.variable)
+        request=lambda wildcards: request_path(wildcards.source, wildcards.variable)
     output:
-        raw=f"{BASE_DIR}/raw/era5/{{variable}}/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_raw.nc"
+        raw=f"{BASE_DIR}/raw/{{source}}/{{variable}}/{{filename}}"
     wildcard_constraints:
-        variable=wildcard_regex(ERA5_VARIABLES)
+        source=wildcard_regex([source for source, _ in API_PAIRS]),
+        variable=wildcard_regex([variable for _, variable in API_PAIRS])
     log:
-        f"{BASE_DIR}/logs/download_era5_{{variable}}_{START_YEAR}_{END_YEAR}.log"
+        f"{BASE_DIR}/logs/{{source}}_{{variable}}_{{filename}}.download.log"
     params:
+        adapter=lambda wildcards: adapter(wildcards.source),
         user_settings=lambda wildcards: config.get("user_settings", "")
     shell:
         """
-        python3 {SCRIPT_DIR}/download_era5_t2m.py \
-          --request-json {input.request} \
+        {PYTHON} {SCRIPT_DIR}/sources/{params.adapter}.py download \
+          --config {CONFIG_PATH} \
+          --source {wildcards.source} \
+          --variable {wildcards.variable} \
+          --request {input.request} \
           --output {output.raw} \
           --log {log} \
-          --user-settings "{params.user_settings}"
+          --user-settings "{params.user_settings}" \
+          > {log} 2>&1
         """
 
 
-rule prepare_era5_monthly:
-    input:
-        raw=lambda wildcards: raw_path(wildcards.variable)
+rule check_manual_variable:
     output:
-        monthly=f"{BASE_DIR}/monthly/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
+        inventory=f"{BASE_DIR}/metadata/{{source}}/{{variable}}/manual_inventory.json"
     wildcard_constraints:
-        variable=wildcard_regex(ERA5_VARIABLES)
+        source=wildcard_regex([source for source, _ in MANUAL_PAIRS]),
+        variable=wildcard_regex([variable for _, variable in MANUAL_PAIRS])
     params:
-        source_name=lambda wildcards: variables[wildcards.variable]["cds_variable"]
+        adapter=lambda wildcards: adapter(wildcards.source)
     shell:
         """
-        python3 {SCRIPT_DIR}/run_product_step.py era5-monthly \
-          --input {input.raw} \
-          --output {output.monthly} \
+        {PYTHON} {SCRIPT_DIR}/sources/{params.adapter}.py check-manual-input \
+          --config {CONFIG_PATH} \
+          --source {wildcards.source} \
           --variable {wildcards.variable} \
-          --source-name "{params.source_name}"
+          --output {output.inventory}
         """
 
 
-rule derive_vpd_monthly:
-    input:
-        t2m=lambda wildcards: monthly_path("t2m"),
-        d2m=lambda wildcards: monthly_path("d2m")
+rule build_source_file_list:
     output:
-        monthly=f"{BASE_DIR}/monthly/vpd_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py derive-vpd \
-          --t2m {input.t2m} \
-          --d2m {input.d2m} \
-          --output {output.monthly}
-        """
-
-
-rule derive_wind_speed_monthly:
-    input:
-        u10=lambda wildcards: monthly_path("u10"),
-        v10=lambda wildcards: monthly_path("v10")
-    output:
-        monthly=f"{BASE_DIR}/monthly/wind_speed_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py derive-wind-speed \
-          --u10 {input.u10} \
-          --v10 {input.v10} \
-          --output {output.monthly}
-        """
-
-
-rule derive_swc_sub_monthly:
-    input:
-        swvl2=lambda wildcards: monthly_path("swvl2"),
-        swvl3=lambda wildcards: monthly_path("swvl3")
-    output:
-        monthly=f"{BASE_DIR}/monthly/swc_sub_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py derive-swc-sub \
-          --swvl2 {input.swvl2} \
-          --swvl3 {input.swvl3} \
-          --output {output.monthly}
-        """
-
-
-rule download_spei_variable:
-    output:
-        raw=f"{BASE_DIR}/raw/spei/{{variable}}_{START_YEAR}_{END_YEAR}_source.nc"
+        file_list=f"{BASE_DIR}/metadata/{{source}}/file_list.json"
     wildcard_constraints:
-        variable=wildcard_regex(SPEI_VARIABLES)
+        source=wildcard_regex(BUNDLE_SOURCES)
     params:
-        scale=lambda wildcards: wildcards.variable.replace("spei", "")
+        adapter=lambda wildcards: adapter(wildcards.source)
     shell:
         """
-        python3 {SCRIPT_DIR}/run_product_step.py spei-download \
-          --output {output.raw} \
-          --scale {params.scale} \
-          --start-year {START_YEAR} \
-          --end-year {END_YEAR}
+        {PYTHON} {SCRIPT_DIR}/sources/{params.adapter}.py build-file-list \
+          --config {CONFIG_PATH} \
+          --source {wildcards.source} \
+          --output {output.file_list}
         """
 
 
-rule prepare_spei_monthly:
+rule download_source_bundle:
     input:
-        raw=f"{BASE_DIR}/raw/spei/{{variable}}_{START_YEAR}_{END_YEAR}_source.nc"
+        file_list=lambda wildcards: source_file_list_path(wildcards.source)
     output:
-        monthly=f"{BASE_DIR}/monthly/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
+        report=f"{BASE_DIR}/metadata/{{source}}/download_report.json",
+        raw_dir=directory(f"{BASE_DIR}/raw/{{source}}")
     wildcard_constraints:
-        variable=wildcard_regex(SPEI_VARIABLES)
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py spei-monthly \
-          --input {input.raw} \
-          --output {output.monthly} \
-          --variable {wildcards.variable} \
-          --start-year {START_YEAR} \
-          --end-year {END_YEAR}
-        """
-
-
-rule prepare_lai_monthly:
-    input:
-        marker=lai_download_marker
-    output:
-        monthly=f"{BASE_DIR}/monthly/lai_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
+        source=wildcard_regex(BUNDLE_SOURCES)
     params:
-        input_dir=LAI_INPUT_DIR,
-        work_dir=f"{BASE_DIR}/work/lai"
+        adapter=lambda wildcards: adapter(wildcards.source)
     shell:
         """
-        python3 {SCRIPT_DIR}/run_product_step.py lai-monthly \
-          --input-dir {params.input_dir} \
-          --work-dir {params.work_dir} \
-          --output {output.monthly} \
-          --start-year {START_YEAR} \
-          --end-year {END_YEAR}
-        """
-
-
-rule download_lai_files:
-    output:
-        marker=f"{BASE_DIR}/work/lai/download_complete.txt"
-    params:
-        output_dir=LAI_INPUT_DIR,
-        method=lai_download_config.get("method", "direct"),
-        url_template=lai_download_config.get("url_template", ""),
-        base_url=lai_download_config.get("base_url", ""),
-        version=lai_download_config.get("version", "R03"),
-        extensions=",".join(lai_download_config.get("extensions", [".h5.gz", ".h5"])),
-        stac_url=lai_download_config.get("stac_url", "https://geodes-portal.cnes.fr/api/stac"),
-        stac_collection=lai_download_config.get("stac_collection", "THEIA_POSTEL_VEGETATION_LAI"),
-        api_key_env=lai_download_config.get("api_key_env", "GEODES_API_KEY"),
-        auth_header=lai_download_config.get("auth_header", "Authorization"),
-        auth_scheme=lai_download_config.get("auth_scheme", "Bearer"),
-        user_settings=lambda wildcards: config.get("user_settings", "")
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py lai-download \
-          --output-dir {params.output_dir} \
-          --marker {output.marker} \
-          --start-year {START_YEAR} \
-          --end-year {END_YEAR} \
-          --method {params.method} \
-          --url-template "{params.url_template}" \
-          --base-url "{params.base_url}" \
-          --version {params.version} \
-          --extensions "{params.extensions}" \
-          --stac-url "{params.stac_url}" \
-          --stac-collection "{params.stac_collection}" \
-          --api-key-env "{params.api_key_env}" \
-          --auth-header "{params.auth_header}" \
-          --auth-scheme "{params.auth_scheme}" \
-          --user-settings "{params.user_settings}"
-        """
-
-
-rule download_co2_monthly_files:
-    output:
-        marker=f"{BASE_DIR}/work/co2/download_complete.txt"
-    params:
-        output_dir=f"{BASE_DIR}/raw/co2/monthly_files"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py co2-download \
-          --output-dir {params.output_dir} \
-          --marker {output.marker} \
-          --start-year {START_YEAR} \
-          --end-year {END_YEAR}
-        """
-
-
-rule merge_co2_monthly_files:
-    input:
-        marker=f"{BASE_DIR}/work/co2/download_complete.txt"
-    output:
-        merged=f"{BASE_DIR}/work/co2/co2_merged_{START_YEAR}_{END_YEAR}_monthly.nc"
-    params:
-        input_dir=f"{BASE_DIR}/raw/co2/monthly_files"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py co2-merge \
-          --input-dir {params.input_dir} \
-          --output {output.merged}
-        """
-
-
-rule extract_co2_surface_monthly:
-    input:
-        merged=f"{BASE_DIR}/work/co2/co2_merged_{START_YEAR}_{END_YEAR}_monthly.nc"
-    output:
-        surface=f"{BASE_DIR}/work/co2/co2_surface_{START_YEAR}_{END_YEAR}_monthly_native.nc"
-    params:
-        level=co2_config.get("surface_level", 0)
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py co2-surface \
-          --input {input.merged} \
-          --output {output.surface} \
-          --level {params.level}
-        """
-
-
-rule extract_co2_column_monthly:
-    input:
-        merged=f"{BASE_DIR}/work/co2/co2_merged_{START_YEAR}_{END_YEAR}_monthly.nc"
-    output:
-        column=f"{BASE_DIR}/work/co2/co2_column_{START_YEAR}_{END_YEAR}_monthly_native.nc"
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py co2-column \
-          --input {input.merged} \
-          --output {output.column}
-        """
-
-
-rule regrid_co2_monthly:
-    input:
-        native=f"{BASE_DIR}/work/co2/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_native.nc"
-    output:
-        monthly=f"{BASE_DIR}/monthly/{{variable}}_{START_YEAR}_{END_YEAR}_monthly_0.5deg.nc"
-    wildcard_constraints:
-        variable=wildcard_regex(CO2_VARIABLES)
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py co2-regrid \
-          --input {input.native} \
-          --output {output.monthly}
-        """
-
-
-rule aggregate_monthly_to_annual:
-    input:
-        monthly=lambda wildcards: monthly_path(wildcards.variable)
-    output:
-        annual=f"{BASE_DIR}/annual/{{variable}}_{START_YEAR}_{END_YEAR}_annual_0.5deg.nc"
-    wildcard_constraints:
-        variable=wildcard_regex(SUPPORTED_VARIABLES)
-    params:
-        aggregation=lambda wildcards: products.get("annual_aggregation", {}).get(wildcards.variable, "mean")
-    shell:
-        """
-        python3 {SCRIPT_DIR}/run_product_step.py annual \
-          --input {input.monthly} \
-          --output {output.annual} \
-          --aggregation {params.aggregation}
+        {PYTHON} {SCRIPT_DIR}/sources/{params.adapter}.py download \
+          --config {CONFIG_PATH} \
+          --file-list {input.file_list} \
+          --output-dir {output.raw_dir} \
+          --report {output.report}
         """

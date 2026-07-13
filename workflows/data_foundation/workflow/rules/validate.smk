@@ -1,26 +1,22 @@
 rule validate_release:
     input:
-        monthly=MONTHLY_NETCDFS,
-        annual=ANNUAL_NETCDFS,
-        requests=REQUESTS,
         manifest=MANIFEST,
-        validations=VALIDATION_REPORTS,
-        croissants=CROISSANTS,
-        checksums=CHECKSUMS
+        checksums=CHECKSUMS,
+        croissant=CROISSANT,
+        requests=REQUESTS,
+        raw_outputs=RAW_OUTPUTS,
+        manual_inventories=MANUAL_INVENTORIES,
+        bundle_file_lists=BUNDLE_FILE_LISTS,
+        bundle_download_reports=BUNDLE_DOWNLOAD_REPORTS,
+        bundle_raw_dirs=BUNDLE_RAW_DIRS,
+        inspections=INSPECTIONS,
+        harmonized_outputs=HARMONIZED_OUTPUTS,
+        harmonized_validation=HARMONIZED_VALIDATION
     output:
-        summary=VALIDATE_LOG
-    params:
-        base_dir=BASE_DIR
+        summary=RELEASE_VALIDATION
     shell:
         """
-        python3 {SCRIPT_DIR}/validate_release.py \
-          --base-dir {params.base_dir} \
-          --manifest {input.manifest} \
-          --checksums {input.checksums} \
-          --validation-reports {input.validations} \
-          --croissants {input.croissants} \
-          --monthly-netcdfs {input.monthly} \
-          --annual-netcdfs {input.annual} \
-          --cds-requests {input.requests} \
-          --output-log {output.summary}
+        {PYTHON} {SCRIPT_DIR}/validate_release.py \
+          --config {CONFIG_PATH} \
+          --output {output.summary}
         """

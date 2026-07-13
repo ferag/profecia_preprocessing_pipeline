@@ -1,36 +1,17 @@
 rule inspect_netcdf:
     input:
-        monthly=lambda wildcards: monthly_path(wildcards.variable)
+        raw=lambda wildcards: raw_path(wildcards.source, wildcards.variable)
     output:
-        report=f"{BASE_DIR}/validation/validation_report_{{variable}}.json"
+        report=f"{BASE_DIR}/validation/{{source}}/{{variable}}/inspection.json"
     wildcard_constraints:
-        variable=wildcard_regex(SUPPORTED_VARIABLES)
-    log:
-        f"{BASE_DIR}/logs/inspect_{{variable}}_{START_YEAR}_{END_YEAR}.log"
-    params:
-        expected_names=lambda wildcards: ",".join(
-            [
-                wildcards.variable,
-                SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get(
-                    "cds_variable",
-                    SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("source_variable", wildcards.variable),
-                ),
-            ]
-        ),
-        expected_unit=lambda wildcards: SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("source_unit", ""),
-        expected_steps=len(YEARS) * len(cds_defaults["months"]),
-        min_value=lambda wildcards: SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("min_reasonable_value", -1e30),
-        max_value=lambda wildcards: SUPPORTED_VARIABLE_METADATA.get(wildcards.variable, {}).get("max_reasonable_value", 1e30)
+        source=wildcard_regex([source for source, _ in API_PAIRS]),
+        variable=wildcard_regex([variable for _, variable in API_PAIRS])
     shell:
         """
-        python3 {SCRIPT_DIR}/inspect_netcdf.py \
-          --input {input.monthly} \
-          --output {output.report} \
-          --log {log} \
+        {PYTHON} {SCRIPT_DIR}/common/netcdf_inspector.py \
+          --input {input.raw} \
+          --source {wildcards.source} \
           --variable {wildcards.variable} \
-          --expected-names {params.expected_names} \
-          --expected-unit "{params.expected_unit}" \
-          --expected-time-steps {params.expected_steps} \
-          --min-reasonable-value {params.min_value} \
-          --max-reasonable-value {params.max_value}
+          --config {CONFIG_PATH} \
+          --output {output.report}
         """
