@@ -1,0 +1,12 @@
+{
+  "run_id": "urn:uuid:00000000-0000-4000-8000-000000000001",
+  "start_time": "2026-01-01T00:00:00Z",
+  "end_time": "2026-01-01T00:01:00Z",
+  "duration": "PT1M",
+  "status": "completed",
+  "snakemake_version": "fixture-version",
+  "python_version": "fixture-version",
+  "conda_environment": "fixture-environment",
+  "platform": "fixture-platform",
+  "git_commit": "0000000000000000000000000000000000000000"
+}

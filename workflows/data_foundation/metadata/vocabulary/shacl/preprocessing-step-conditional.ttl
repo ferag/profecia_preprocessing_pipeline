@@ -1,0 +1,96 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix profecia: <https://w3id.org/profecia/terms/> .
+@prefix step: <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+@prefix schema: <http://schema.org/> .
+
+profecia:PreprocessingStepConditionalShape a sh:NodeShape ;
+  sh:targetClass profecia:PreprocessingStep ;
+  sh:sparql [
+    sh:message "derived-variable requires formula/algorithm, input/output variables with units, parameters, and implementation."@en ;
+    sh:select """
+      PREFIX profecia: <https://w3id.org/profecia/terms/>
+      PREFIX step: <https://w3id.org/profecia/vocab/preprocessing-step-type/>
+      PREFIX schema: <http://schema.org/>
+      SELECT $this WHERE {
+        $this profecia:stepType step:derived-variable .
+        FILTER (
+          !EXISTS { $this profecia:formula ?formula } ||
+          !EXISTS { $this profecia:parameter ?parameter } ||
+          !EXISTS { $this profecia:implementedBy ?code } ||
+          !EXISTS { $this profecia:input ?input } ||
+          !EXISTS { $this profecia:output/schema:variableMeasured ?variable . ?variable (schema:unitText|schema:unitCode) ?unit }
+        )
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "spatial-harmonization requires source/target grid, CRS, resolution, and interpolation/resampling method parameters."@en ;
+    sh:select """
+      PREFIX profecia: <https://w3id.org/profecia/terms/>
+      PREFIX step: <https://w3id.org/profecia/vocab/preprocessing-step-type/>
+      PREFIX schema: <http://schema.org/>
+      SELECT $this WHERE {
+        $this profecia:stepType step:spatial-harmonization .
+        FILTER (
+          !EXISTS { $this profecia:parameter/schema:name "source_grid" } ||
+          !EXISTS { $this profecia:parameter/schema:name "target_grid" } ||
+          !EXISTS { $this profecia:parameter/schema:name "crs" } ||
+          !EXISTS { $this profecia:parameter/schema:name "resolution" } ||
+          !EXISTS { $this profecia:parameter/schema:name "resampling_method" }
+        )
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "temporal-aggregation requires input/output frequency, aggregation function, and incomplete-data policy."@en ;
+    sh:select """
+      PREFIX profecia: <https://w3id.org/profecia/terms/>
+      PREFIX step: <https://w3id.org/profecia/vocab/preprocessing-step-type/>
+      PREFIX schema: <http://schema.org/>
+      SELECT $this WHERE {
+        $this profecia:stepType step:temporal-aggregation .
+        FILTER (
+          !EXISTS { $this profecia:parameter/schema:name "input_frequency" } ||
+          !EXISTS { $this profecia:parameter/schema:name "output_frequency" } ||
+          !EXISTS { $this profecia:parameter/schema:name "aggregation_function" } ||
+          !EXISTS { $this profecia:missingDataPolicy ?policy }
+        )
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "quality-control requires validated resource, checks, acceptance criteria, result, and generated report."@en ;
+    sh:select """
+      PREFIX profecia: <https://w3id.org/profecia/terms/>
+      PREFIX step: <https://w3id.org/profecia/vocab/preprocessing-step-type/>
+      PREFIX schema: <http://schema.org/>
+      SELECT $this WHERE {
+        $this profecia:stepType step:quality-control .
+        FILTER (
+          !EXISTS { $this profecia:input ?validated } ||
+          !EXISTS { $this profecia:parameter/schema:name "checks" } ||
+          !EXISTS { $this profecia:parameter/schema:name "acceptance_criteria" } ||
+          !EXISTS { $this profecia:parameter/schema:name "result" } ||
+          !EXISTS { $this profecia:parameter/schema:name "report" }
+        )
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "acquisition requires source, access mechanism, request, product version, and access conditions."@en ;
+    sh:select """
+      PREFIX profecia: <https://w3id.org/profecia/terms/>
+      PREFIX step: <https://w3id.org/profecia/vocab/preprocessing-step-type/>
+      PREFIX schema: <http://schema.org/>
+      SELECT $this WHERE {
+        $this profecia:stepType step:acquisition .
+        FILTER (
+          !EXISTS { $this profecia:input ?source } ||
+          !EXISTS { $this profecia:parameter/schema:name "access_mechanism" } ||
+          !EXISTS { $this profecia:parameter/schema:name "request" } ||
+          !EXISTS { $this profecia:parameter/schema:name "product_version" } ||
+          !EXISTS { $this profecia:parameter/schema:name "access_conditions" }
+        )
+      }
+    """
+  ] .

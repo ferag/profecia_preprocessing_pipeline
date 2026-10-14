@@ -1,0 +1,1121 @@
+[
+  {
+    "@id": "https://w3id.org/profecia/terms/unitStatus",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Explains why a scientific variable has no verified machine-readable unit mapping."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "estado de unidad"
+      },
+      {
+        "@language": "en",
+        "@value": "unit status"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "Unit not recorded; no unit is invented."
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/stepType",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Classifies a generic preprocessing plan with one or more concepts from the extensible PROFECIA SKOS scheme."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "tipo de paso"
+      },
+      {
+        "@language": "en",
+        "@value": "step type"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2004/02/skos/core#Concept"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/vocab/preprocessing-step-type/derived-variable"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/parameter",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Named setting or constant controlling the planned transformation."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "parámetro"
+      },
+      {
+        "@language": "en",
+        "@value": "parameter"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://schema.org/PropertyValue"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+      {
+        "@id": "https://w3id.org/fair4prep#parameters"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#target-depth"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/input",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Resource required by the planned transformation."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "input"
+      },
+      {
+        "@language": "es",
+        "@value": "entrada"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Entity"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#input-netcdf"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/example",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "example"
+      },
+      {
+        "@language": "es",
+        "@value": "ejemplo"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/status",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Lifecycle or documentation status of the plan."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "status"
+      },
+      {
+        "@language": "es",
+        "@value": "estado"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "documented"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/implementedBy",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Software source file implementing the plan; the file is not an agent."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "implemented by"
+      },
+      {
+        "@language": "es",
+        "@value": "implementado por"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://schema.org/SoftwareSourceCode"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#script"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/formula",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Mathematical expression used by the plan, when applicable."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "fórmula"
+      },
+      {
+        "@language": "en",
+        "@value": "formula"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+      {
+        "@id": "http://schema.org/mathExpression"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "wind = sqrt(u10**2 + v10**2)"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/expectedCardinality",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "cardinalidad esperada"
+      },
+      {
+        "@language": "en",
+        "@value": "expected cardinality"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/PreprocessingStep",
+    "@type": [
+      "http://www.w3.org/2000/01/rdf-schema#Class"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "A prospective scientific recipe or plan, distinct from the activity that executes it."
+      },
+      {
+        "@language": "es",
+        "@value": "Una receta o plan científico prospectivo, distinto de la actividad que lo ejecuta."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Preprocessing step"
+      },
+      {
+        "@language": "es",
+        "@value": "Paso de preprocesado"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#subClassOf": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Plan"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#prep-derived-swvl1-2"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/appliesTo",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Scientific variable, dataset, field, or other resource to which the plan applies."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "se aplica a"
+      },
+      {
+        "@language": "en",
+        "@value": "applies to"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Entity"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+      {
+        "@id": "https://w3id.org/fair4prep#appliesTo"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#variable-lai"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/wasPreprocessedBy",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Links a resulting entity to the prospective preprocessing plan; prov:wasGeneratedBy identifies the execution."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Entity"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "was preprocessed by"
+      },
+      {
+        "@language": "es",
+        "@value": "fue preprocesado por"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#prep-derived-swvl1-2"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/rationale",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Scientific justification for choosing the transformation or its settings."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "rationale"
+      },
+      {
+        "@language": "es",
+        "@value": "justificación"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "Required by the downstream monthly interface."
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/qualityControl",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Validation plan, criteria, or report associated with the planned transformation."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "quality control"
+      },
+      {
+        "@language": "es",
+        "@value": "control de calidad"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Entity"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+      {
+        "@id": "https://w3id.org/fair4prep#AuditingStep"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#validation-report"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/missingDataPolicy",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Rule for invalid, missing, incomplete, or masked values."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "política de datos ausentes"
+      },
+      {
+        "@language": "en",
+        "@value": "missing-data policy"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "Values outside the valid range are masked before aggregation."
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/baseGitCommit",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Commit on which a source snapshot with uncommitted changes is based; it is not asserted as the exact version of that snapshot."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "base Git commit"
+      },
+      {
+        "@language": "es",
+        "@value": "commit Git base"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "5b023208977cbdc74d7ec66f7e587e552e78d04c"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/termStatus",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "term status"
+      },
+      {
+        "@language": "es",
+        "@value": "estado del término"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/",
+    "@type": [
+      "http://www.w3.org/2002/07/owl#Ontology"
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@language": "en",
+        "@value": "Small vocabulary for prospective scientific preprocessing plans. Concrete operation kinds are SKOS concepts, not OWL classes."
+      }
+    ],
+    "http://purl.org/dc/terms/license": [
+      {
+        "@id": "https://spdx.org/licenses/CC0-1.0.html"
+      }
+    ],
+    "http://purl.org/dc/terms/title": [
+      {
+        "@language": "es",
+        "@value": "Vocabulario de preprocesado PROFECIA"
+      },
+      {
+        "@language": "en",
+        "@value": "PROFECIA preprocessing vocabulary"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/relatedWorkflowAction",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Execution activity related to this plan. The qualified PROV association remains authoritative for agent-plan qualification."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "related workflow action"
+      },
+      {
+        "@language": "es",
+        "@value": "acción de workflow relacionada"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Activity"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#activity"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/output",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Resource expected from the planned transformation."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "salida"
+      },
+      {
+        "@language": "en",
+        "@value": "output"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/ns/prov#Entity"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@id": "https://w3id.org/profecia/example#output-netcdf"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/confidence",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Confidence or evidence status attached to the plan description."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "confianza"
+      },
+      {
+        "@language": "en",
+        "@value": "confidence"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "explicit"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/recordingStatus",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "States whether execution or environment metadata were recorded, without classifying the described resource as a preprocessing plan."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "recording status"
+      },
+      {
+        "@language": "es",
+        "@value": "estado de registro"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "not-recorded"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/usedByProductKey",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Local manifest product key that resolves a provenance input to a downstream product."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "used by product key"
+      },
+      {
+        "@language": "es",
+        "@value": "usado por clave de producto"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "hwsd2/sand"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "0..n"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "experimental"
+      }
+    ]
+  },
+  {
+    "@id": "https://w3id.org/profecia/terms/method",
+    "@type": [
+      "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#comment": [
+      {
+        "@language": "en",
+        "@value": "Human-readable algorithm or scientific method used by the plan."
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#domain": [
+      {
+        "@id": "https://w3id.org/profecia/terms/PreprocessingStep"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "es",
+        "@value": "método"
+      },
+      {
+        "@language": "en",
+        "@value": "method"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#range": [
+      {
+        "@id": "http://www.w3.org/2000/01/rdf-schema#Literal"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#versionInfo": [
+      {
+        "@value": "1.0.0"
+      }
+    ],
+    "https://w3id.org/profecia/terms/example": [
+      {
+        "@value": "Thickness-weighted mean"
+      }
+    ],
+    "https://w3id.org/profecia/terms/expectedCardinality": [
+      {
+        "@value": "1"
+      }
+    ],
+    "https://w3id.org/profecia/terms/termStatus": [
+      {
+        "@value": "stable"
+      }
+    ]
+  }
+]

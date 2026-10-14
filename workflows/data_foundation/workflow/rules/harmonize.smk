@@ -1,6 +1,6 @@
 rule harmonize_monthly_netcdf:
     input:
-        raw=lambda wildcards: [] if variable_has_canonical_reference(wildcards.source, wildcards.variable) else raw_path(wildcards.source, wildcards.variable)
+        raw=lambda wildcards: variable_config(wildcards.source, wildcards.variable)["canonical_reference_path"] if variable_has_canonical_reference(wildcards.source, wildcards.variable) else raw_path(wildcards.source, wildcards.variable)
     output:
         monthly=f"{BASE_DIR}/monthly/{{source}}_{{variable}}_monthly_0.5deg.nc"
     params:
@@ -22,7 +22,7 @@ rule harmonize_monthly_netcdf:
 
 rule harmonize_annual_netcdf:
     input:
-        raw=lambda wildcards: [] if variable_has_canonical_reference(wildcards.source, wildcards.variable) else raw_path(wildcards.source, wildcards.variable)
+        raw=lambda wildcards: variable_config(wildcards.source, wildcards.variable)["canonical_reference_path"] if variable_has_canonical_reference(wildcards.source, wildcards.variable) else raw_path(wildcards.source, wildcards.variable)
     output:
         annual=f"{BASE_DIR}/annual/{{source}}_{{variable}}_annual_0.5deg.nc"
     params:
@@ -45,7 +45,8 @@ rule harmonize_annual_netcdf:
 rule harmonize_hwsd2_static:
     input:
         report=lambda wc: [] if hwsd2_uses_canonical_reference() else f"{BASE_DIR}/metadata/hwsd2/download_report.json",
-        raw_dir=lambda wc: [] if hwsd2_uses_canonical_reference() else f"{BASE_DIR}/raw/hwsd2"
+        raw_dir=lambda wc: [] if hwsd2_uses_canonical_reference() else f"{BASE_DIR}/raw/hwsd2",
+        canonical=lambda wc: [str(Path(sources["hwsd2"]["canonical_reference_dir"]) / sources["hwsd2"].get("canonical_reference_template", "{variable}_1982_2022_monthly_0.5deg.nc").format(variable=variable)) for source, variable in selected_pairs() if source == "hwsd2"] if hwsd2_uses_canonical_reference() else []
     output:
         static=f"{BASE_DIR}/static/hwsd2_soil_0.5deg.nc"
     shell:
@@ -58,33 +59,49 @@ rule harmonize_hwsd2_static:
 
 rule derive_swvl12_monthly:
     input:
-        swvl1=f"{BASE_DIR}/monthly/era5_single_levels_swvl1_monthly_0.5deg.nc",
-        swvl2=f"{BASE_DIR}/monthly/era5_single_levels_swvl2_monthly_0.5deg.nc"
+        swvl1=lambda wc: [] if has_canonical_reference("monthly", "swvl1-2") else f"{BASE_DIR}/monthly/era5_single_levels_swvl1_monthly_0.5deg.nc",
+        swvl2=lambda wc: [] if has_canonical_reference("monthly", "swvl1-2") else f"{BASE_DIR}/monthly/era5_single_levels_swvl2_monthly_0.5deg.nc"
     output:
         monthly=f"{BASE_DIR}/monthly/swvl1-2_{{period}}_monthly_0.5deg.nc"
+    params:
+        canonical=canonical_reference("monthly", "swvl1-2")
     wildcard_constraints:
         period=r"[0-9]{4}_[0-9]{4}"
     shell:
         """
-        {PYTHON} {SCRIPT_DIR}/common/derive_swvl12.py \
-          --swvl1 {input.swvl1} \
-          --swvl2 {input.swvl2} \
-          --output {output.monthly}
+        if [ -n "{params.canonical}" ]; then
+          {PYTHON} {SCRIPT_DIR}/common/repackage_local.py annual \
+            --variable swvl1-2 --output {output.monthly} \
+            --canonical-reference "{params.canonical}"
+        else
+          {PYTHON} {SCRIPT_DIR}/common/derive_swvl12.py \
+            --swvl1 {input.swvl1} \
+            --swvl2 {input.swvl2} \
+            --output {output.monthly}
+        fi
         """
 
 
 rule derive_vpd_monthly:
     input:
-        t2m=f"{BASE_DIR}/monthly/era5_single_levels_t2m_monthly_0.5deg.nc",
-        d2m=f"{BASE_DIR}/monthly/era5_single_levels_d2m_monthly_0.5deg.nc"
+        t2m=lambda wc: [] if has_canonical_reference("monthly", "vpd") else f"{BASE_DIR}/monthly/era5_single_levels_t2m_monthly_0.5deg.nc",
+        d2m=lambda wc: [] if has_canonical_reference("monthly", "vpd") else f"{BASE_DIR}/monthly/era5_single_levels_d2m_monthly_0.5deg.nc"
     output:
         monthly=f"{BASE_DIR}/monthly/vpd_{{period}}_monthly_0.5deg.nc"
+    params:
+        canonical=canonical_reference("monthly", "vpd")
     wildcard_constraints:
         period=r"[0-9]{4}_[0-9]{4}"
     shell:
         """
-        {PYTHON} {SCRIPT_DIR}/common/derive_products.py vpd \
-          --t2m {input.t2m} --d2m {input.d2m} --output {output.monthly}
+        if [ -n "{params.canonical}" ]; then
+          {PYTHON} {SCRIPT_DIR}/common/repackage_local.py annual \
+            --variable vpd --output {output.monthly} \
+            --canonical-reference "{params.canonical}"
+        else
+          {PYTHON} {SCRIPT_DIR}/common/derive_products.py vpd \
+            --t2m {input.t2m} --d2m {input.d2m} --output {output.monthly}
+        fi
         """
 
 rule derive_subswc_monthly:
@@ -103,21 +120,29 @@ rule derive_subswc_monthly:
 
 rule derive_wind_monthly:
     input:
-        u10=f"{BASE_DIR}/monthly/era5_single_levels_u10_monthly_0.5deg.nc",
-        v10=f"{BASE_DIR}/monthly/era5_single_levels_v10_monthly_0.5deg.nc"
+        u10=lambda wc: [] if has_canonical_reference("monthly", "wind") else f"{BASE_DIR}/monthly/era5_single_levels_u10_monthly_0.5deg.nc",
+        v10=lambda wc: [] if has_canonical_reference("monthly", "wind") else f"{BASE_DIR}/monthly/era5_single_levels_v10_monthly_0.5deg.nc"
     output:
         monthly=f"{BASE_DIR}/monthly/wind_{{period}}_monthly_0.5deg.nc"
+    params:
+        canonical=canonical_reference("monthly", "wind")
     wildcard_constraints:
         period=r"[0-9]{4}_[0-9]{4}"
     shell:
         """
-        {PYTHON} {SCRIPT_DIR}/common/derive_products.py wind \
-          --u10 {input.u10} --v10 {input.v10} --output {output.monthly}
+        if [ -n "{params.canonical}" ]; then
+          {PYTHON} {SCRIPT_DIR}/common/repackage_local.py annual \
+            --variable wind --output {output.monthly} \
+            --canonical-reference "{params.canonical}"
+        else
+          {PYTHON} {SCRIPT_DIR}/common/derive_products.py wind \
+            --u10 {input.u10} --v10 {input.v10} --output {output.monthly}
+        fi
         """
 
 rule derive_spei06_univariable_monthly:
     input:
-        spei06=lambda wc: [] if has_canonical_reference("monthly", "spei06_univariable") else f"{BASE_DIR}/monthly/speibase_v211_spei06_monthly_0.5deg.nc"
+        spei06=lambda wc: canonical_reference("monthly", "spei06_univariable") if has_canonical_reference("monthly", "spei06_univariable") else f"{BASE_DIR}/monthly/speibase_v211_spei06_monthly_0.5deg.nc"
     output:
         monthly=f"{BASE_DIR}/monthly/spei06_univariable_{{period}}_monthly_0.5deg.nc"
     params:
@@ -135,7 +160,7 @@ rule derive_spei06_univariable_monthly:
 
 rule repackage_tlu_annual:
     input:
-        src=lambda wc: [] if has_canonical_reference("annual", "tlu") else "resources/source_data/annual/tlu_1982_2022_annual_0.5deg.nc"
+        src=lambda wc: canonical_reference("annual", "tlu") if has_canonical_reference("annual", "tlu") else "resources/source_data/annual/tlu_1982_2022_annual_0.5deg.nc"
     output:
         annual=f"{BASE_DIR}/annual/tlu_1982_2022_annual_0.5deg.nc"
     params:
@@ -148,9 +173,24 @@ rule repackage_tlu_annual:
           --canonical-reference "{params.canonical}"
         """
 
+rule prepare_gmted2010_elevation:
+    input:
+        report=f"{BASE_DIR}/metadata/gmted2010/download_report.json",
+        raw_dir=f"{BASE_DIR}/raw/gmted2010"
+    output:
+        static=f"{BASE_DIR}/work/gmted2010/elevation_0.5deg.nc",
+        inspection=f"{BASE_DIR}/validation/gmted2010/elevation/inspection.json"
+    shell:
+        """
+        {PYTHON} {SCRIPT_DIR}/sources/gmted2010.py prepare \
+          --archive {input.raw_dir}/mn30_grd.zip \
+          --output {output.static} --report {output.inspection}
+        """
+
+
 rule repackage_static_monthly:
     input:
-        src=lambda wc: [] if has_canonical_reference("monthly", wc.variable) else static_monthly_source(wc.variable)
+        src=lambda wc: canonical_reference("monthly", wc.variable) if has_canonical_reference("monthly", wc.variable) else static_monthly_source(wc.variable)
     output:
         monthly=f"{BASE_DIR}/monthly/{{variable}}_1982_2022_monthly_0.5deg.nc"
     params:
@@ -169,27 +209,36 @@ rule repackage_static_monthly:
 
 rule process_lai_monthly:
     input:
-        src_dir="resources/source_data/lai_h5gz"
+        src_dir=lambda wc: [] if has_canonical_reference("monthly", "lai") else config.get("local_input_paths", {}).get("lai_h5gz", "resources/source_data/lai_h5gz")
     output:
         monthly=f"{BASE_DIR}/monthly/lai_1982_2022_monthly_0.5deg.nc"
+    params:
+        canonical=canonical_reference("monthly", "lai")
     shell:
         """
-        {PYTHON} {SCRIPT_DIR}/common/process_lai.py \
-          --input-dir {input.src_dir} --output {output.monthly} \
-          --start-year 1982 --end-year 2022
+        if [ -n "{params.canonical}" ]; then
+          {PYTHON} {SCRIPT_DIR}/common/repackage_local.py annual \
+            --variable lai --output {output.monthly} \
+            --canonical-reference "{params.canonical}"
+        else
+          {PYTHON} {SCRIPT_DIR}/common/process_lai.py \
+            --input-dir {input.src_dir} --output {output.monthly} \
+            --start-year 1982 --end-year 2022
+        fi
         """
 
 
 rule derive_co2_annual:
     input:
         monthly=lambda wc: [] if has_canonical_reference("annual", "co2") else f"{BASE_DIR}/monthly/carbontracker_co2_co2_monthly_0.5deg.nc",
-        gml=lambda wc: [] if has_canonical_reference("annual", "co2") else "/srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv"
+        gml=lambda wc: [] if has_canonical_reference("annual", "co2") else config.get("local_input_paths", {}).get("co2_gml_csv", "/srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv"),
+        canonical=lambda wc: canonical_reference("annual", "co2") if has_canonical_reference("annual", "co2") else []
     output:
         annual=f"{BASE_DIR}/annual/co2_1982_2022_annual_0.5deg.nc"
     params:
         canonical=canonical_reference("annual", "co2"),
         monthly_arg=lambda wc: "" if has_canonical_reference("annual", "co2") else f"--monthly-co2 {BASE_DIR}/monthly/carbontracker_co2_co2_monthly_0.5deg.nc",
-        gml_arg=lambda wc: "" if has_canonical_reference("annual", "co2") else "--gml-csv /srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv"
+        gml_arg=lambda wc: "" if has_canonical_reference("annual", "co2") else f"--gml-csv {config.get('local_input_paths', {}).get('co2_gml_csv', '/srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv')}"
     shell:
         """
         {PYTHON} {SCRIPT_DIR}/common/derive_co2_annual.py \

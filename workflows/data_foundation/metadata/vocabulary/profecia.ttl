@@ -1,0 +1,134 @@
+@prefix profecia: <https://w3id.org/profecia/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+profecia: a owl:Ontology ;
+  dcterms:title "PROFECIA preprocessing vocabulary"@en, "Vocabulario de preprocesado PROFECIA"@es ;
+  dcterms:description "Small vocabulary for prospective scientific preprocessing plans. Concrete operation kinds are SKOS concepts, not OWL classes."@en ;
+  dcterms:license <https://spdx.org/licenses/CC0-1.0.html> ;
+  owl:versionInfo "1.0.0" ;
+  profecia:termStatus "stable" .
+
+profecia:expectedCardinality a rdf:Property ; rdfs:label "expected cardinality"@en, "cardinalidad esperada"@es .
+profecia:example a rdf:Property ; rdfs:label "example"@en, "ejemplo"@es .
+profecia:termStatus a rdf:Property ; rdfs:label "term status"@en, "estado del término"@es .
+
+profecia:recordingStatus a rdf:Property ;
+  rdfs:label "recording status"@en, "estado de registro"@es ;
+  rdfs:comment "States whether execution or environment metadata were recorded, without classifying the described resource as a preprocessing plan."@en ;
+  rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..1" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "not-recorded" .
+
+profecia:unitStatus a rdf:Property ;
+  rdfs:label "unit status"@en, "estado de unidad"@es ;
+  rdfs:comment "Explains why a scientific variable has no verified machine-readable unit mapping."@en ;
+  rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..1" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "Unit not recorded; no unit is invented." .
+
+profecia:usedByProductKey a rdf:Property ;
+  rdfs:label "used by product key"@en, "usado por clave de producto"@es ;
+  rdfs:comment "Local manifest product key that resolves a provenance input to a downstream product."@en ;
+  rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..n" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "hwsd2/sand" .
+
+profecia:baseGitCommit a rdf:Property ;
+  rdfs:label "base Git commit"@en, "commit Git base"@es ;
+  rdfs:comment "Commit on which a source snapshot with uncommitted changes is based; it is not asserted as the exact version of that snapshot."@en ;
+  rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..1" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "5b023208977cbdc74d7ec66f7e587e552e78d04c" .
+
+profecia:PreprocessingStep a rdfs:Class ;
+  rdfs:subClassOf prov:Plan ;
+  rdfs:label "Preprocessing step"@en, "Paso de preprocesado"@es ;
+  rdfs:comment "A prospective scientific recipe or plan, distinct from the activity that executes it."@en,
+               "Una receta o plan científico prospectivo, distinto de la actividad que lo ejecuta."@es ;
+  owl:versionInfo "1.0.0" ; profecia:termStatus "stable" ;
+  profecia:example <https://w3id.org/profecia/example#prep-derived-swvl1-2> .
+
+profecia:stepType a rdf:Property ;
+  rdfs:label "step type"@en, "tipo de paso"@es ;
+  rdfs:comment "Classifies a generic preprocessing plan with one or more concepts from the extensible PROFECIA SKOS scheme."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range skos:Concept ;
+  profecia:expectedCardinality "1..n" ; profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ;
+  profecia:example <https://w3id.org/profecia/vocab/preprocessing-step-type/derived-variable> .
+
+profecia:input a rdf:Property ;
+  rdfs:label "input"@en, "entrada"@es ; rdfs:comment "Resource required by the planned transformation."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range prov:Entity ; profecia:expectedCardinality "1..n" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example <https://w3id.org/profecia/example#input-netcdf> .
+
+profecia:output a rdf:Property ;
+  rdfs:label "output"@en, "salida"@es ; rdfs:comment "Resource expected from the planned transformation."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range prov:Entity ; profecia:expectedCardinality "1..n" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example <https://w3id.org/profecia/example#output-netcdf> .
+
+profecia:appliesTo a rdf:Property ;
+  rdfs:label "applies to"@en, "se aplica a"@es ; rdfs:comment "Scientific variable, dataset, field, or other resource to which the plan applies."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range prov:Entity ; profecia:expectedCardinality "0..n" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ;
+  rdfs:seeAlso <https://w3id.org/fair4prep#appliesTo> ; profecia:example <https://w3id.org/profecia/example#variable-lai> .
+
+profecia:method a rdf:Property ;
+  rdfs:label "method"@en, "método"@es ; rdfs:comment "Human-readable algorithm or scientific method used by the plan."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "1" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example "Thickness-weighted mean" .
+
+profecia:formula a rdf:Property ;
+  rdfs:label "formula"@en, "fórmula"@es ; rdfs:comment "Mathematical expression used by the plan, when applicable."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..n" ;
+  rdfs:seeAlso schema:mathExpression ; profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ;
+  profecia:example "wind = sqrt(u10**2 + v10**2)" .
+
+profecia:parameter a rdf:Property ;
+  rdfs:label "parameter"@en, "parámetro"@es ; rdfs:comment "Named setting or constant controlling the planned transformation."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range schema:PropertyValue ; profecia:expectedCardinality "0..n" ;
+  rdfs:seeAlso <https://w3id.org/fair4prep#parameters> ; profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ;
+  profecia:example <https://w3id.org/profecia/example#target-depth> .
+
+profecia:implementedBy a rdf:Property ;
+  rdfs:label "implemented by"@en, "implementado por"@es ; rdfs:comment "Software source file implementing the plan; the file is not an agent."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range schema:SoftwareSourceCode ; profecia:expectedCardinality "1..n" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example <https://w3id.org/profecia/example#script> .
+
+profecia:rationale a rdf:Property ;
+  rdfs:label "rationale"@en, "justificación"@es ; rdfs:comment "Scientific justification for choosing the transformation or its settings."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..n" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "Required by the downstream monthly interface." .
+
+profecia:qualityControl a rdf:Property ;
+  rdfs:label "quality control"@en, "control de calidad"@es ; rdfs:comment "Validation plan, criteria, or report associated with the planned transformation."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range prov:Entity ; profecia:expectedCardinality "0..n" ;
+  rdfs:seeAlso <https://w3id.org/fair4prep#AuditingStep> ; profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ;
+  profecia:example <https://w3id.org/profecia/example#validation-report> .
+
+profecia:relatedWorkflowAction a rdf:Property ;
+  rdfs:label "related workflow action"@en, "acción de workflow relacionada"@es ;
+  rdfs:comment "Execution activity related to this plan. The qualified PROV association remains authoritative for agent-plan qualification."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range prov:Activity ; profecia:expectedCardinality "1..n" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example <https://w3id.org/profecia/example#activity> .
+
+profecia:status a rdf:Property ;
+  rdfs:label "status"@en, "estado"@es ; rdfs:comment "Lifecycle or documentation status of the plan."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "1" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "documented" .
+
+profecia:confidence a rdf:Property ;
+  rdfs:label "confidence"@en, "confianza"@es ; rdfs:comment "Confidence or evidence status attached to the plan description."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..1" ;
+  profecia:termStatus "experimental" ; owl:versionInfo "1.0.0" ; profecia:example "explicit" .
+
+profecia:wasPreprocessedBy a rdf:Property ;
+  rdfs:label "was preprocessed by"@en, "fue preprocesado por"@es ; rdfs:comment "Links a resulting entity to the prospective preprocessing plan; prov:wasGeneratedBy identifies the execution."@en ;
+  rdfs:domain prov:Entity ; rdfs:range profecia:PreprocessingStep ; profecia:expectedCardinality "0..n" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example <https://w3id.org/profecia/example#prep-derived-swvl1-2> .
+
+profecia:missingDataPolicy a rdf:Property ;
+  rdfs:label "missing-data policy"@en, "política de datos ausentes"@es ; rdfs:comment "Rule for invalid, missing, incomplete, or masked values."@en ;
+  rdfs:domain profecia:PreprocessingStep ; rdfs:range rdfs:Literal ; profecia:expectedCardinality "0..1" ;
+  profecia:termStatus "stable" ; owl:versionInfo "1.0.0" ; profecia:example "Values outside the valid range are masked before aggregation." .

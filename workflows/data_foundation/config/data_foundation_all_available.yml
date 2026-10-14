@@ -1,0 +1,1190 @@
+release:
+  id: profecia_inputs_all_available_v0
+  base_dir: resources/data_releases/profecia_inputs_all_available_v0
+  status: all-available-general-ro-crate
+  start_year: 1982
+  end_year: 2022
+  temporal_resolution: monthly
+  target_grid:
+    name: global_0p5deg
+    resolution: 0.5deg
+    latitude: 89.5:-90.0
+    longitude: -180.0:179.5
+    crs: EPSG:4326
+provenance_inputs:
+- id: original_script_preprocess_co2_annual
+  role: original_script
+  path: workflows/data_foundation/workflow/scripts/legacy/preprocess_co2_annual.py
+  copy_policy: copy
+  license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
+  used_by: [derived_human/co2]
+- id: original_script_preprocess_ndep
+  role: original_script
+  path: workflows/data_foundation/workflow/scripts/legacy/preprocess_ndep.py
+  copy_policy: copy
+  license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
+  used_by: [ndep_tian2022/ndep]
+- id: original_script_preprocess_hfp
+  role: original_script
+  path: workflows/data_foundation/workflow/scripts/legacy/preprocess_hfp_0p5.py
+  copy_policy: copy
+  license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
+  used_by: [hfp_mu_hengl/hfp]
+- id: original_script_preprocess_soil
+  role: original_script
+  path: workflows/data_foundation/workflow/scripts/legacy/preprocess_soil_0p5.py
+  copy_policy: copy
+  license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
+  used_by: [hwsd2/sand, hwsd2/clay, hwsd2/silt, hwsd2/ph, hwsd2/soc, hwsd2/total_n, hwsd2/bulk, hwsd2/cec]
+- id: original_script_preprocess_grazing
+  role: original_script
+  path: workflows/data_foundation/workflow/scripts/legacy/preprocess_grazing_annual.py
+  copy_policy: copy
+  license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
+  used_by: [local_annual/tlu]
+- id: target_grid_lai_annual
+  role: target_grid
+  path: /srv/read_only_data/final_datasets/annual/lai_1982_2022_annual_0.5deg.nc
+  copy_policy: reference
+  license_or_terms: Canonical PROFECIA LAI target grid; referenced, not copied.
+  used_by: [ndep_tian2022/ndep, hfp_mu_hengl/hfp, local_annual/tlu, hwsd2/sand, hwsd2/clay, hwsd2/silt, hwsd2/ph, hwsd2/soc, hwsd2/total_n, hwsd2/bulk, hwsd2/cec]
+- id: lai_h5gz_source_directory
+  role: raw_input
+  path: resources/source_data/lai_h5gz
+  copy_policy: reference
+  license_or_terms: THEIA GEOV2-GCM AVHRR LAI source composites; referenced for reproducibility, not redistributed in the RO-Crate.
+  used_by: [local_lai/lai]
+  description: Local directory of 10-day THEIA GEOV2-GCM AVHRR LAI H5.GZ composites. The workflow converts digital numbers to physical LAI using LAI = DN / 30, masks invalid DN values outside [0, 210], and computes monthly means on the PROFECIA 0.5 degree grid.
+- id: co2_ct2022_level1
+  role: raw_input
+  path: /srv/read_only_data/raw/co2/co2_2000_2021_monthly_0.5deg_level1.nc
+  copy_policy: reference
+  license_or_terms: CarbonTracker CT2022 source input; governed by original provider terms.
+  used_by: [derived_human/co2]
+- id: co2_noaa_gml_csv
+  role: raw_input
+  path: /srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv
+  copy_policy: reference
+  license_or_terms: NOAA GML global mean CO2 CSV; governed by original provider terms.
+  used_by: [derived_human/co2]
+- id: ndep_nhx
+  role: raw_input
+  path: /srv/read_only_data/NANA/human/RAW/N/ndep_nhx.nc
+  copy_policy: reference
+  license_or_terms: Tian et al. nitrogen deposition component; governed by original provider terms.
+  used_by: [ndep_tian2022/ndep]
+- id: ndep_noy
+  role: raw_input
+  path: /srv/read_only_data/NANA/human/RAW/N/ndep_noy.nc
+  copy_policy: reference
+  license_or_terms: Tian et al. nitrogen deposition component; governed by original provider terms.
+  used_by: [ndep_tian2022/ndep]
+- id: hfp_canonical_annual
+  role: canonical_reference
+  path: /srv/read_only_data/final_datasets/annual/human/hfp_1982_2022_annual_0.5deg.nc
+  copy_policy: reference
+  license_or_terms: Canonical PROFECIA final human footprint product; referenced, not copied.
+  used_by: [hfp_mu_hengl/hfp]
+- id: hwsd2_bil
+  role: raw_input
+  path: /srv/read_only_data/NANA/soil/RAW/HWSD2_soil/RAW/HWSD2_RASTER/HWSD2.bil
+  copy_policy: reference
+  license_or_terms: HWSD2 raster input; governed by original provider terms.
+  used_by: [hwsd2/sand, hwsd2/clay, hwsd2/silt, hwsd2/ph, hwsd2/soc, hwsd2/total_n, hwsd2/bulk, hwsd2/cec]
+- id: hwsd2_layers_csv
+  role: raw_input
+  path: /srv/read_only_data/NANA/soil/RAW/HWSD2_soil/RAW/HWSD2_LAYERS.csv
+  copy_policy: reference
+  license_or_terms: HWSD2 layer attribute table; governed by original provider terms.
+  used_by: [hwsd2/sand, hwsd2/clay, hwsd2/silt, hwsd2/ph, hwsd2/soc, hwsd2/total_n, hwsd2/bulk, hwsd2/cec]
+- id: livestockmap_archive
+  role: raw_input
+  path: /srv/read_only_data/NANA/human/RAW/Grazing/RAW/LivestockMap.zip
+  copy_policy: reference
+  license_or_terms: LivestockMap source rasters; referenced, not copied.
+  used_by: [local_annual/tlu]
+- id: tlu_canonical_annual
+  role: canonical_reference
+  path: /srv/read_only_data/final_datasets/annual/human/tlu_1982_2022_annual_0.5deg.nc
+  copy_policy: reference
+  license_or_terms: Canonical PROFECIA final TLU product; referenced, not copied.
+  used_by: [local_annual/tlu]
+canonical_reference_products:
+  annual/co2: /srv/read_only_data/final_datasets/annual/human/co2_1982_2022_annual_0.5deg.nc
+  annual/tlu: /srv/read_only_data/final_datasets/annual/human/tlu_1982_2022_annual_0.5deg.nc
+  monthly/spei06_univariable: /srv/read_only_data/final_datasets/monthly/spei06_univariable_1982_2022_monthly_0.5deg.nc
+  monthly/bulk: /srv/read_only_data/final_datasets/monthly/soil/bulk_1982_2022_monthly_0.5deg.nc
+  monthly/cec: /srv/read_only_data/final_datasets/monthly/soil/cec_1982_2022_monthly_0.5deg.nc
+  monthly/clay: /srv/read_only_data/final_datasets/monthly/soil/clay_1982_2022_monthly_0.5deg.nc
+  monthly/elevation: /srv/read_only_data/final_datasets/monthly/soil/elevation_1982_2022_monthly_0.5deg.nc
+  monthly/ph: /srv/read_only_data/final_datasets/monthly/soil/ph_1982_2022_monthly_0.5deg.nc
+  monthly/richness: /srv/read_only_data/final_datasets/monthly/soil/richness_1982_2022_monthly_0.5deg.nc
+  monthly/sand: /srv/read_only_data/final_datasets/monthly/soil/sand_1982_2022_monthly_0.5deg.nc
+  monthly/silt: /srv/read_only_data/final_datasets/monthly/soil/silt_1982_2022_monthly_0.5deg.nc
+  monthly/soc: /srv/read_only_data/final_datasets/monthly/soil/soc_1982_2022_monthly_0.5deg.nc
+  monthly/total_n: /srv/read_only_data/final_datasets/monthly/soil/total_n_1982_2022_monthly_0.5deg.nc
+ro_crate_packaging:
+  copy_harmonized_outputs: false
+  copy_raw_inputs: false
+  reference_large_inputs: true
+  copy_allowlist:
+    - monthly/lai_1982_2022_monthly_0.5deg.nc
+    - resources/source_data/masks/*.npy
+selected_variables:
+- source: era5_single_levels
+  variable: t2m
+- source: era5_single_levels
+  variable: d2m
+- source: era5_single_levels
+  variable: tp
+- source: era5_single_levels
+  variable: pev
+- source: era5_single_levels
+  variable: ssrd
+- source: era5_single_levels
+  variable: swvl1
+- source: era5_single_levels
+  variable: swvl2
+- source: era5_single_levels
+  variable: swvl3
+- source: era5_single_levels
+  variable: tcc
+- source: era5_single_levels
+  variable: u10
+- source: era5_single_levels
+  variable: v10
+- source: carbontracker_co2
+  variable: co2
+- source: ndep_tian2022
+  variable: ndep
+- source: hfp_mu_hengl
+  variable: hfp
+- source: hwsd2
+  variable: sand
+- source: hwsd2
+  variable: clay
+- source: hwsd2
+  variable: silt
+- source: hwsd2
+  variable: ph
+- source: hwsd2
+  variable: soc
+- source: hwsd2
+  variable: total_n
+- source: hwsd2
+  variable: bulk
+- source: hwsd2
+  variable: cec
+- source: speibase_v211
+  variable: spei01
+- source: speibase_v211
+  variable: spei02
+- source: speibase_v211
+  variable: spei03
+- source: speibase_v211
+  variable: spei06
+- source: speibase_v211
+  variable: spei09
+- source: speibase_v211
+  variable: spei12
+- source: speibase_v211
+  variable: spei24
+sources:
+  era5_single_levels:
+    provider: ECMWF / Copernicus Climate Data Store
+    source_family: ERA5 single-level monthly means
+    access_mode: api
+    access_protocol: cdsapi
+    dataset: reanalysis-era5-single-levels-monthly-means
+    product_type: monthly_averaged_reanalysis
+    adapter: era5
+    requires_authentication: true
+    variables:
+      t2m:
+        cds_name: 2m_temperature
+        long_name: 2 metre temperature
+        role: predictor
+        source_units: K
+        expected_min: 180
+        expected_max: 330
+        years: &id001
+        - '1982'
+        - '1983'
+        - '1984'
+        - '1985'
+        - '1986'
+        - '1987'
+        - '1988'
+        - '1989'
+        - '1990'
+        - '1991'
+        - '1992'
+        - '1993'
+        - '1994'
+        - '1995'
+        - '1996'
+        - '1997'
+        - '1998'
+        - '1999'
+        - '2000'
+        - '2001'
+        - '2002'
+        - '2003'
+        - '2004'
+        - '2005'
+        - '2006'
+        - '2007'
+        - '2008'
+        - '2009'
+        - '2010'
+        - '2011'
+        - '2012'
+        - '2013'
+        - '2014'
+        - '2015'
+        - '2016'
+        - '2017'
+        - '2018'
+        - '2019'
+        - '2020'
+        - '2021'
+        - '2022'
+        months: &id002
+        - '01'
+        - '02'
+        - '03'
+        - '04'
+        - '05'
+        - '06'
+        - '07'
+        - 08
+        - 09
+        - '10'
+        - '11'
+        - '12'
+        time: &id003
+        - 00:00
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: t2m_1982_2022_monthly_raw.nc
+      d2m:
+        cds_name: 2m_dewpoint_temperature
+        long_name: 2 metre dewpoint temperature
+        role: predictor
+        source_units: K
+        expected_min: 180
+        expected_max: 330
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: d2m_1982_2022_monthly_raw.nc
+      tp:
+        cds_name: total_precipitation
+        long_name: Total precipitation
+        role: predictor
+        source_units: m
+        expected_min: 0
+        expected_max: 2
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: tp_1982_2022_monthly_raw.nc
+      pev:
+        cds_name: potential_evaporation
+        long_name: Potential evaporation
+        role: predictor
+        source_units: m
+        expected_min: -2
+        expected_max: 2
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: pev_1982_2022_monthly_raw.nc
+      ssrd:
+        cds_name: surface_solar_radiation_downwards
+        long_name: Surface solar radiation downwards
+        role: predictor
+        source_units: J m**-2
+        expected_min: 0
+        expected_max: 400000000
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: ssrd_1982_2022_monthly_raw.nc
+      swvl1:
+        cds_name: volumetric_soil_water_layer_1
+        long_name: Volumetric soil water layer 1
+        role: predictor
+        source_units: m**3 m**-3
+        expected_min: 0
+        expected_max: 1
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: swvl1_1982_2022_monthly_raw.nc
+      swvl2:
+        cds_name: volumetric_soil_water_layer_2
+        long_name: Volumetric soil water layer 2
+        role: predictor
+        source_units: m**3 m**-3
+        expected_min: 0
+        expected_max: 1
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: swvl2_1982_2022_monthly_raw.nc
+      swvl3:
+        cds_name: volumetric_soil_water_layer_3
+        long_name: Volumetric soil water layer 3
+        role: predictor
+        source_units: m**3 m**-3
+        expected_min: 0
+        expected_max: 1
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: swvl3_1982_2022_monthly_raw.nc
+      tcc:
+        cds_name: total_cloud_cover
+        long_name: Total cloud cover
+        role: predictor
+        source_units: 0-1
+        expected_min: 0
+        expected_max: 1
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: tcc_1982_2022_monthly_raw.nc
+      u10:
+        cds_name: 10m_u_component_of_wind
+        long_name: 10 metre U wind component
+        role: predictor
+        source_units: m s**-1
+        expected_min: -100
+        expected_max: 100
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: u10_1982_2022_monthly_raw.nc
+      v10:
+        cds_name: 10m_v_component_of_wind
+        long_name: 10 metre V wind component
+        role: predictor
+        source_units: m s**-1
+        expected_min: -100
+        expected_max: 100
+        years: *id001
+        months: *id002
+        time: *id003
+        data_format: netcdf
+        download_format: unarchived
+        output_filename: v10_1982_2022_monthly_raw.nc
+  geov2_lai:
+    provider: THEIA
+    source_family: GEOV2 / GEOV2-GCM AVHRR LAI
+    access_mode: manual
+    access_protocol: manual_local_input
+    adapter: lai_geov2
+    requires_authentication: false
+    raw_input_dir: data/manual/GEOV2_GCM_LAI/
+    instructions: 'GEOV2 or GEOV2-GCM AVHRR LAI files must be downloaded manually
+      and placed in data/manual/GEOV2_GCM_LAI/. This prototype only registers and
+      validates manually available files; it does not download LAI automatically.
+
+      '
+    variables:
+      lai:
+        long_name: Leaf Area Index
+        role: target
+        source_units: m2 m-2
+        native_format: h5.gz
+        native_temporal_resolution: 10-day composites
+        expected_patterns:
+        - THEIA_GEOV2_R01_AVHRR_LAI_*.h5
+        - THEIA_GEOV2_R01_AVHRR_LAI_*.h5.gz
+        - THEIA_GEOV2_R02_AVHRR_LAI_*.h5
+        - THEIA_GEOV2_R02_AVHRR_LAI_*.h5.gz
+        - THEIA_GEOV2-GCM_R01_AVHRR_LAI_*.h5
+        - THEIA_GEOV2-GCM_R01_AVHRR_LAI_*.h5.gz
+        - THEIA_GEOV2-GCM_R02_AVHRR_LAI_*.h5
+        - THEIA_GEOV2-GCM_R02_AVHRR_LAI_*.h5.gz
+        processed_demo_output_filename: lai_manual_input_inventory.json
+  carbontracker_co2:
+    provider: NOAA Global Monitoring Laboratory
+    source_family: CarbonTracker CT2022 + NOAA GML global mean CO2
+    access_mode: http
+    access_protocol: https
+    adapter: co2
+    requires_authentication: false
+    carbontracker:
+      role: spatial_co2_fields
+      product: co2_total_monthly
+      base_url: https://gml.noaa.gov/aftp/products/carbontracker/co2/CT2022/molefractions/co2_total_monthly/
+      filename_pattern: CT2022.molefrac_glb3x2_{year}-{month}.nc
+      start_year: 2000
+      end_year: 2020
+      months: *id002
+      native_grid: global 3x2 degree
+      format: NetCDF
+      variable_description: atmospheric CO2 mole fraction field
+      keep_monthly_files: false
+    noaa_gml_global_mean:
+      role: temporal_extension_or_offset
+      url: https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv
+      format: CSV
+      spatial: false
+      description: globally averaged marine surface monthly mean CO2
+    notes:
+    - CarbonTracker CT2022 provides the spatial CO2 fields.
+    - NOAA GML global mean CO2 is not spatial; it is used to extend or offset the
+      CarbonTracker maps for years not covered by the spatial product.
+    - Existing preprocessing logic combines both sources with a monthly average offset
+      method.
+    variables:
+      co2:
+        long_name: Atmospheric CO2 concentration
+        category: Human
+        dimensionality: 3D dynamic
+        anomaly: true
+        transform: Per-pixel detrended anomaly
+        role: predictor
+        source_units: ppm
+        description: "Atmospheric CO2 concentration \u2014 fertilisation effect"
+        native_variable: co2
+        output_filename: co2_2000_2020_monthly_glb3x2.nc
+  ndep_tian2022:
+    provider: Tian et al. 2022 (PANGAEA)
+    source_family: HaNi anthropogenic nitrogen deposition
+    access_mode: http
+    access_protocol: https
+    adapter: ndep
+    requires_authentication: false
+    doi: 10.1594/PANGAEA.942069
+    landing_page: https://doi.pangaea.de/10.1594/PANGAEA.942069
+    source_start_year: 1860
+    source_end_year: 2019
+    native_units: g N per cell yr-1
+    components:
+      nhx:
+        role: NHx-N deposition
+        url: https://download.pangaea.de/dataset/942069/files/ndep_nhx.zip
+        filename: ndep_nhx.nc
+        variable: ndep_nhx
+      noy:
+        role: NOy-N deposition
+        url: https://download.pangaea.de/dataset/942069/files/ndep_noy.zip
+        filename: ndep_noy.nc
+        variable: ndep_noy
+    notes:
+    - HaNi covers 1860-2019; PROFECIA may require 1982-2022.
+    - ndep is computed as ndep_nhx + ndep_noy.
+    - Missing target years after the source period are extrapolated with per-pixel
+      OLS following the existing prototype script.
+    variables:
+      ndep:
+        long_name: Nitrogen deposition
+        category: Human
+        dimensionality: 3D dynamic
+        anomaly: true
+        transform: Per-pixel detrended anomaly
+        role: predictor
+        source_units: g N m-2 yr-1
+        description: "Nitrogen deposition \u2014 nutrient addition driving productivity\
+          \ change"
+        canonical_reference_path: /srv/read_only_data/final_datasets/annual/human/ndep_1982_2022_annual_0.5deg.nc
+        start_year: 1982
+        end_year: 2022
+        coarsen_factor: 6
+        extrapolation:
+          method: per_pixel_ols
+          ols_start_year: 2015
+          clip_to_historical_max_factor: 1.5
+        output_filename: ndep_1982_2022_annual_0.5deg.nc
+  hfp_mu_hengl:
+    provider: Mu 2022 + Hengl 2022 (bias-corrected)
+    source_family: Human footprint
+    access_mode: http
+    access_protocol: https
+    adapter: hfp
+    requires_authentication: false
+    target_grid:
+      resolution_degrees: 0.5
+      west: -180.0
+      north: 90.0
+      n_lat: 360
+      n_lon: 720
+      crs: EPSG:4326
+    mu_figshare:
+      role: observed_annual_maps
+      article: 'Mu et al. (2022): A global record of annual terrestrial Human Footprint
+        dataset from 2000 to 2018'
+      article_url: https://www.nature.com/articles/s41597-022-01284-8
+      doi: 10.6084/m9.figshare.16571064
+      landing_page: https://figshare.com/articles/figure/An_annual_global_terrestrial_Human_Footprint_dataset_from_2000_to_2018/16571064
+      api_url: https://api.figshare.com/v2/articles/16571064
+      verified_start_year: 2000
+      verified_end_year: 2018
+      expected_zip_pattern: hfp{year}.zip
+    hengl_zenodo:
+      role: extrapolated_early_year_maps
+      doi: 10.5281/zenodo.6636562
+      landing_page: https://zenodo.org/records/6636562
+      start_year: 1982
+      end_year: 1999
+      url_pattern: https://zenodo.org/records/6636562/files/hfootprint_{year}_1km.tif?download=1
+      year_2000_url: https://zenodo.org/records/6636562/files/hfp2000.tif?download=1
+    notes:
+    - Figshare API is used to list Mu et al. files and download_url values; HTML scraping
+      is not used.
+    - The article verifies 2000-2018, but the adapter records currently available
+      Figshare years in request.json before download.
+    - Hengl 2022 provides extrapolated earlier-year maps for 1982-1999.
+    variables:
+      hfp:
+        long_name: Human footprint index
+        category: Human
+        dimensionality: 3D dynamic
+        anomaly: true
+        transform: Per-pixel detrended anomaly
+        role: predictor
+        source_units: index
+        description: "Human footprint index \u2014 composite of built environment,\
+          \ population, roads, lights, croplands, and pasture"
+        canonical_reference_path: /srv/read_only_data/final_datasets/annual/human/hfp_1982_2022_annual_0.5deg.nc
+        start_year: 1982
+        end_year: 2022
+        output_filename: hfp_1982_2022_annual_0.5deg.nc
+  livestockmap:
+    provider: FAO-derived / internal or manually provided LivestockMap
+    source_family: Annual livestock density maps
+    access_mode: manual_or_internal
+    access_protocol: local_file
+    adapter: livestockmap
+    requires_authentication: false
+    public_source_verified: false
+    notes:
+    - A public directly downloadable LivestockMap annual 1961-2021 source has not
+      been verified.
+    - Treat LivestockMap.zip as a manually provided or internally stored derived dataset.
+    - The raw archive should contain annual livestock density rasters by species and
+      year.
+    - Optional future reconstruction could combine FAOSTAT national time series with
+      GLW spatial templates, but this is not implemented here.
+    raw_archive:
+      expected_path: data/manual/LivestockMap/LivestockMap.zip
+    expected_period:
+      start_year: 1961
+      end_year: 2021
+    profecia_target_period:
+      start_year: 1982
+      end_year: 2022
+    temporal_extension:
+      source_available_until: 2021
+      target_required_until: 2022
+      extension_policy: TODO_CONFIRM
+      possible_policies:
+      - hold_last_available_year
+      - user_provided_2022
+      - crop_to_2021
+    species:
+      cattle:
+        weight: 1.0
+        expected_patterns:
+        - '*cattle*{year}*.tif'
+        - '*Cattle*{year}*.tif'
+      buffalo:
+        weight: 1.0
+        expected_patterns:
+        - '*buffalo*{year}*.tif'
+        - '*Buffalo*{year}*.tif'
+      horse:
+        weight: 0.8
+        expected_patterns:
+        - '*horse*{year}*.tif'
+        - '*Horse*{year}*.tif'
+      sheep:
+        weight: 0.1
+        expected_patterns:
+        - '*sheep*{year}*.tif'
+        - '*Sheep*{year}*.tif'
+      goats:
+        weight: 0.1
+        expected_patterns:
+        - '*goat*{year}*.tif'
+        - '*Goat*{year}*.tif'
+    variables:
+      tlu:
+        long_name: Tropical Livestock Units
+        category: Human
+        data_structure: 3D dynamic
+        dimensionality: 3D dynamic
+        anomaly: true
+        role: predictor
+        source_units: "TLU/km\xB2"
+        units: "TLU/km\xB2"
+        formula: TLU = cattle + buffalo + 0.8 * horse + 0.1 * sheep + 0.1 * goats
+        transform: Per-pixel detrended anomaly
+        target_value_type: per-pixel detrended anomaly
+        description: "Tropical Livestock Units \u2014 cattle + buffalo + 0.8 horse\
+          \ + 0.1 sheep + 0.1 goats"
+  hwsd2:
+    provider: FAO / IIASA / ISRIC / JRC / CAS
+    source_family: Harmonized World Soil Database v2.0
+    access_mode: http
+    access_protocol: direct_http
+    adapter: hwsd2
+    requires_authentication: false
+    landing_page: https://www.fao.org/soils-portal/data-hub/soil-maps-and-databases/harmonized-world-soil-database-v20/en/
+    native_spatial_resolution: 30 arc-second / approximately 1 km
+    preprocessing_target: hwsd2_soil_0.5deg.nc
+    canonical_reference_dir: /srv/read_only_data/final_datasets/monthly/soil
+    canonical_reference_template: "{variable}_1982_2022_monthly_0.5deg.nc"
+    preprocessing_script_reference: workflows/data_foundation/workflow/scripts/legacy/preprocess_soil_0p5.py
+    verification_script_reference: workflows/data_foundation/workflow/scripts/legacy/verify_soil_outputs.py
+    expected_processed_grid:
+      latitude_size: 360
+      longitude_size: 720
+      resolution: 0.5deg
+      latitude_range: -90.0 to 89.5
+      longitude_range: -180.0 to 179.5
+    expected_extracted_inputs:
+      raster: HWSD2.bil
+      layer_attributes: HWSD2_LAYERS.csv
+    processing_notes:
+    - Download HWSD2_RASTER.zip and HWSD2_DB.zip once for the source, not once per
+      variable.
+    - The current preprocessing script expects the ZIP contents to be extracted before
+      processing.
+    - The provided preprocessing script currently uses the shallowest/topsoil HWSD2
+      layer, not a 0-100 cm aggregate.
+    - 'Expected derived variables: sand, clay, silt, ph, soc, total_n, bulk, cec.'
+    - verify_soil_outputs.py expects soc and total_n in percent.
+    data_files:
+      database:
+        url: https://s3.eu-west-1.amazonaws.com/data.gaezdev.aws.fao.org/HWSD/HWSD2_DB.zip
+        filename: HWSD2_DB.zip
+      raster:
+        url: https://s3.eu-west-1.amazonaws.com/data.gaezdev.aws.fao.org/HWSD/HWSD2_RASTER.zip
+        filename: HWSD2_RASTER.zip
+    variables:
+      sand:
+        long_name: Sand fraction
+        category: Soil
+        units: '%'
+        source_units: '%'
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      clay:
+        long_name: Clay fraction
+        category: Soil
+        units: '%'
+        source_units: '%'
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      silt:
+        long_name: Silt fraction
+        category: Soil
+        units: '%'
+        source_units: '%'
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      ph:
+        long_name: Soil pH
+        category: Soil
+        units: pH
+        source_units: pH
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      soc:
+        long_name: Soil organic carbon
+        category: Soil
+        units: '%'
+        source_units: '%'
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      total_n:
+        long_name: Total soil nitrogen
+        category: Soil
+        units: '%'
+        source_units: '%'
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      bulk:
+        long_name: Bulk density
+        category: Soil
+        units: g/cm3
+        source_units: g/cm3
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+      cec:
+        long_name: Cation exchange capacity
+        category: Soil
+        units: cmol/kg
+        source_units: cmol/kg
+        data_structure: 2D static
+        dimensionality: 2D static
+        role: moderator
+        transform: Raw value (moderator only)
+  gtopo30:
+    provider: USGS EROS
+    source_family: GTOPO30 digital elevation model
+    access_mode: usgs_authenticated
+    access_protocol: usgs_m2m_api
+    adapter: gtopo30
+    requires_authentication: true
+    doi: 10.5066/F7DF6PQS
+    landing_page: https://www.usgs.gov/centers/eros/science/usgs-eros-archive-digital-elevation-global-30-arc-second-elevation-gtopo30
+    native_spatial_resolution: 30 arc-second
+    credentials:
+      source: local_secrets_file
+      path: workflows/data_foundation/config/secrets.local.yml
+      key: usgs_m2m
+    download_design_status: credentials_ready_pending_m2m_product_selection
+    notes:
+    - USGS credentials are read from environment variables or the local git-ignored
+      secrets file.
+    - USGS M2M product/entity selection for GTOPO30 must be confirmed before automated
+      download is enabled.
+    variables:
+      elevation:
+        long_name: Digital elevation model
+        category: Topography
+        units: m
+        source_units: m
+        data_structure: 2D static
+        dimensionality: 2D static
+        anomaly: false
+        transform: Raw value (moderator only)
+        role: moderator
+        description: "Digital elevation model \u2014 background climate modifier;\
+          \ alpine vs lowland"
+  static:
+    provider: sPlot
+    source_family: Static 2D manually provided moderators
+    access_mode: manual
+    access_protocol: manual_local_input
+    adapter: manual_local
+    requires_authentication: false
+    raw_input_dir: data/manual/static/
+    instructions: 'Place static moderator files under data/manual/static/. The workflow
+      currently registers these local files; harmonization to the target grid will
+      be added later.
+
+      '
+    variables:
+      richness:
+        long_name: Plant species richness
+        category: Biology
+        dimensionality: 2D static
+        anomaly: false
+        transform: Raw value (moderator only)
+        role: moderator
+        source_family: sPlot v3 / Keil 2019
+        provider: sPlot v3 / Keil 2019
+        source_units: count
+        description: "Plant species richness \u2014 biodiversity proxy for resilience"
+        expected_patterns:
+        - '*richness*.nc'
+        - '*richness*.tif'
+        - '*splot*.nc'
+        - '*splot*.tif'
+  speibase_v211:
+    provider: CSIC
+    source_family: SPEIbase v2.11
+    version: '2.11'
+    access_mode: http
+    access_protocol: https
+    adapter: spei
+    requires_authentication: false
+    base_url: https://spei.csic.es/spei_database_2_11/nc/
+    landing_page: https://spei.csic.es/database.html
+    doi: 10.20350/digitalCSIC/16964
+    source_start_year: 1901
+    source_end_year: 2023
+    native_spatial_resolution: 0.5 degree
+    notes:
+    - The adapter downloads the original SPEIbase NetCDF for each scale from CSIC
+      and crops it to the PROFECIA target period.
+    - Spatial alignment to the PROFECIA 0.5 degree grid is handled by the common harmonization
+      step.
+    variables:
+      spei01:
+        scale: 1
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (01-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei01_1982_2022_monthly_0.5deg.nc
+      spei02:
+        scale: 2
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (02-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei02_1982_2022_monthly_0.5deg.nc
+      spei03:
+        scale: 3
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (03-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei03_1982_2022_monthly_0.5deg.nc
+      spei06:
+        scale: 6
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (06-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei06_1982_2022_monthly_0.5deg.nc
+      spei09:
+        scale: 9
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (09-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei09_1982_2022_monthly_0.5deg.nc
+      spei12:
+        scale: 12
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (12-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei12_1982_2022_monthly_0.5deg.nc
+      spei24:
+        scale: 24
+        native_variable: spei
+        long_name: Standardized Precipitation-Evapotranspiration Index (24-month scale)
+        category: Climate drought index
+        dimensionality: 3D dynamic
+        native_temporal_resolution: monthly
+        role: predictor
+        source_units: standardized_index
+        units: standardized_index
+        expected_min: -5
+        expected_max: 5
+        start_year: 1982
+        end_year: 2022
+        output_filename: spei24_1982_2022_monthly_0.5deg.nc
+derived_products:
+- id: swvl1-2
+  source: derived_soil_water
+  variable: swvl1-2
+  long_name: Volumetric soil water layer 1-2 weighted mean
+  role: predictor
+  source_units: m**3 m**-3
+  units: m**3 m**-3
+  temporal_resolution: monthly
+  output_filename: swvl1-2_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - monthly/era5_single_levels_swvl1_monthly_0.5deg.nc
+  - monthly/era5_single_levels_swvl2_monthly_0.5deg.nc
+  source_variables:
+  - source: era5_single_levels
+    variable: swvl1
+  - source: era5_single_levels
+    variable: swvl2
+  formula: swvl1-2 = (swvl1 * 7 + swvl2 * 21) / 28
+  weights: 'swvl1: 7/28; swvl2: 21/28'
+  description: Weighted combination of swvl1 and swvl2. swvl1 represents the first
+    7 cm and swvl2 the following 21 cm, yielding a weighted mean for the 0-28 cm layer.
+  notebook_reference: /srv/volumes/ferag/profecia/notebooks/check_d_swvl_combined.ipynb
+- id: vpd
+  source: derived_climate
+  variable: vpd
+  long_name: Vapor Pressure Deficit
+  source_units: kPa
+  units: kPa
+  output_filename: vpd_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - monthly/era5_single_levels_t2m_monthly_0.5deg.nc
+  - monthly/era5_single_levels_d2m_monthly_0.5deg.nc
+  formula: VPD = es(T2M) - ea(D2M); Magnus-type equation
+  description: Vapor pressure deficit computed from 2m temperature and 2m dewpoint
+    temperature.
+  role: predictor
+  temporal_resolution: monthly
+- id: subswc
+  source: derived_soil_water
+  variable: subswc
+  long_name: Sub-surface Soil Water Content
+  source_units: m**3 m**-3
+  units: m**3 m**-3
+  output_filename: subswc_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - monthly/era5_single_levels_swvl2_monthly_0.5deg.nc
+  - monthly/era5_single_levels_swvl3_monthly_0.5deg.nc
+  formula: subswc = (swvl2 * 21 + swvl3 * 72) / 93
+  description: Weighted subsurface soil water content from ERA5 soil water layers
+    2 and 3.
+  role: predictor
+  temporal_resolution: monthly
+- id: wind
+  source: derived_climate
+  variable: wind
+  long_name: 10 m wind speed
+  source_units: m s**-1
+  units: m s**-1
+  output_filename: wind_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - monthly/era5_single_levels_u10_monthly_0.5deg.nc
+  - monthly/era5_single_levels_v10_monthly_0.5deg.nc
+  formula: wind = sqrt(u10**2 + v10**2)
+  description: 10 m wind speed computed from ERA5 u10 and v10 components.
+  role: predictor
+  temporal_resolution: monthly
+- id: spei06_univariable
+  source: derived_drought_index
+  variable: spei06
+  long_name: SPEI 06-month univariable product
+  source_units: standardized_index
+  units: standardized_index
+  output_filename: spei06_univariable_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - monthly/speibase_v211_spei06_monthly_0.5deg.nc
+  formula: Alias/repackaging of SPEIbase v2.11 spei06 for downstream univariable naming
+    convention.
+  description: SPEI 06-month product repackaged under the downstream expected filename.
+  role: predictor
+  temporal_resolution: monthly
+- id: tlu
+  source: local_annual
+  variable: tlu
+  long_name: Tropical Livestock Units
+  role: predictor
+  temporal_resolution: annual
+  source_units: TLU/km2
+  units: TLU/km2
+  output_filename: tlu_1982_2022_annual_0.5deg.nc
+  input_files:
+  - resources/source_data/annual/tlu_1982_2022_annual_0.5deg.nc
+  description: Local annual TLU resource repackaged into the release.
+- id: elevation
+  source: local_static
+  variable: elevation
+  long_name: elevation
+  role: moderator
+  temporal_resolution: monthly
+  source_units: m
+  units: m
+  output_filename: elevation_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/elevation_0.5deg.nc
+  description: Static elevation repeated monthly
+- id: richness
+  source: local_static
+  variable: richness
+  long_name: richness
+  role: moderator
+  temporal_resolution: monthly
+  source_units: species
+  units: species
+  output_filename: richness_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/richness_0.5deg.nc
+  description: Static species richness repeated monthly
+- id: ph
+  source: local_hwsd2_monthly
+  variable: ph
+  long_name: ph
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: ph_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static ph layer repeated monthly for PROFECIA period.
+- id: bulk
+  source: local_hwsd2_monthly
+  variable: bulk
+  long_name: bulk
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: bulk_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static bulk layer repeated monthly for PROFECIA period.
+- id: cec
+  source: local_hwsd2_monthly
+  variable: cec
+  long_name: cec
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: cec_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static cec layer repeated monthly for PROFECIA period.
+- id: clay
+  source: local_hwsd2_monthly
+  variable: clay
+  long_name: clay
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: clay_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static clay layer repeated monthly for PROFECIA period.
+- id: sand
+  source: local_hwsd2_monthly
+  variable: sand
+  long_name: sand
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: sand_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static sand layer repeated monthly for PROFECIA period.
+- id: silt
+  source: local_hwsd2_monthly
+  variable: silt
+  long_name: silt
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: silt_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static silt layer repeated monthly for PROFECIA period.
+- id: soc
+  source: local_hwsd2_monthly
+  variable: soc
+  long_name: soc
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: soc_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static soc layer repeated monthly for PROFECIA period.
+- id: total_n
+  source: local_hwsd2_monthly
+  variable: total_n
+  long_name: total_n
+  role: moderator
+  temporal_resolution: monthly
+  source_units: ''
+  units: ''
+  output_filename: total_n_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/static/hwsd2_soil_0p5_100cm.nc
+  description: HWSD2 static total_n layer repeated monthly for PROFECIA period.
+- id: lai
+  source: local_lai
+  variable: lai
+  long_name: Leaf Area Index
+  role: target
+  temporal_resolution: monthly
+  source_units: m2 m-2
+  units: m2 m-2
+  output_filename: lai_1982_2022_monthly_0.5deg.nc
+  input_files:
+  - resources/source_data/lai_h5gz/
+  formula: LAI = DN / 30; monthly mean of available 10-day composites
+  description: THEIA GEOV2-GCM AVHRR LAI H5.GZ local files converted to physical LAI
+    and aggregated to monthly 0.5 degree NetCDF.
+- id: co2_annual
+  source: derived_human
+  variable: co2
+  long_name: Annual mean atmospheric CO2 mole fraction
+  role: predictor
+  temporal_resolution: annual
+  source_units: ppm
+  units: ppm
+  output_filename: co2_1982_2022_annual_0.5deg.nc
+  input_files:
+  - monthly/carbontracker_co2_co2_monthly_0.5deg.nc
+  - /srv/read_only_data/NANA/human/RAW/co2/co2_mm_gl.csv
+  formula: 'Monthly average offset: map(y,m) = map(2000,m) - (GML(2000,m) - GML(y,m));
+    annual mean from monthly fields.'
+  description: CarbonTracker monthly CO2 fields extended to 1982-2022 using NOAA GML
+    global monthly mean offsets, then averaged annually.

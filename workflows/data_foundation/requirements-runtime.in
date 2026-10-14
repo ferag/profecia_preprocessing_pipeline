@@ -1,0 +1,10 @@
+# Python 3.12. Compile/install requirements-runtime.lock.txt for the pilot.
+snakemake==9.26.1
+snakemake-report-plugin-rocrate @ git+https://github.com/snakemake/snakemake-report-plugin-rocrate.git@e3202263df07e66451d77dec7d916e5c5721e5d5
+xarray
+netcdf4
+numpy
+pandas
+scipy
+pyyaml
+rdflib

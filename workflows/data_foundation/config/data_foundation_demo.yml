@@ -15,31 +15,31 @@ release:
 provenance_inputs:
   - id: original_script_preprocess_co2_annual
     role: original_script
-    path: /srv/read_only_data/NANA/scripts/current/preprocess_co2_annual.py
+    path: workflows/data_foundation/workflow/scripts/legacy/preprocess_co2_annual.py
     copy_policy: copy
     license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
     used_by: [derived_human/co2]
   - id: original_script_preprocess_ndep
     role: original_script
-    path: /srv/read_only_data/NANA/scripts/current/preprocess_ndep.py
+    path: workflows/data_foundation/workflow/scripts/legacy/preprocess_ndep.py
     copy_policy: copy
     license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
     used_by: [ndep_tian2022/ndep]
   - id: original_script_preprocess_hfp
     role: original_script
-    path: /srv/read_only_data/NANA/scripts/current/preprocess_hfp_0p5.py
+    path: workflows/data_foundation/workflow/scripts/legacy/preprocess_hfp_0p5.py
     copy_policy: copy
     license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
     used_by: [hfp_mu_hengl/hfp]
   - id: original_script_preprocess_soil
     role: original_script
-    path: /srv/read_only_data/NANA/scripts/current/preprocess_soil_0p5.py
+    path: workflows/data_foundation/workflow/scripts/legacy/preprocess_soil_0p5.py
     copy_policy: copy
     license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
     used_by: [hwsd2/sand, hwsd2/clay, hwsd2/silt, hwsd2/ph, hwsd2/soc, hwsd2/total_n, hwsd2/bulk, hwsd2/cec]
   - id: original_script_preprocess_grazing
     role: original_script
-    path: /srv/read_only_data/NANA/scripts/current/preprocess_grazing_annual.py
+    path: workflows/data_foundation/workflow/scripts/legacy/preprocess_grazing_annual.py
     copy_policy: copy
     license_or_terms: Internal PROFECIA preprocessing script; include for reproducibility.
     used_by: [local_annual/tlu]
@@ -118,6 +118,14 @@ canonical_reference_products:
   monthly/silt: /srv/read_only_data/final_datasets/monthly/soil/silt_1982_2022_monthly_0.5deg.nc
   monthly/soc: /srv/read_only_data/final_datasets/monthly/soil/soc_1982_2022_monthly_0.5deg.nc
   monthly/total_n: /srv/read_only_data/final_datasets/monthly/soil/total_n_1982_2022_monthly_0.5deg.nc
+
+ro_crate_packaging:
+  copy_harmonized_outputs: false
+  copy_raw_inputs: false
+  reference_large_inputs: true
+  copy_allowlist:
+    - monthly/lai_1982_2022_monthly_0.5deg.nc
+    - resources/source_data/masks/*.npy
 
 selected_variables:
   - source: era5_single_levels
@@ -550,8 +558,8 @@ sources:
     preprocessing_target: hwsd2_soil_0.5deg.nc
     canonical_reference_dir: /srv/read_only_data/final_datasets/monthly/soil
     canonical_reference_template: "{variable}_1982_2022_monthly_0.5deg.nc"
-    preprocessing_script_reference: /srv/read_only_data/NANA/scripts/current/preprocess_soil_0p5.py
-    verification_script_reference: /srv/read_only_data/NANA/scripts/current/verify_soil_outputs.py
+    preprocessing_script_reference: workflows/data_foundation/workflow/scripts/legacy/preprocess_soil_0p5.py
+    verification_script_reference: workflows/data_foundation/workflow/scripts/legacy/verify_soil_outputs.py
     expected_processed_grid:
       latitude_size: 360
       longitude_size: 720

@@ -58,6 +58,11 @@ def variable_temporal_kind(var: dict[str, Any]) -> str:
 
 
 def harmonized_path(base_dir: Path, source: str, variable: str, var: dict[str, Any], source_bundle: bool) -> Path | None:
+    if var.get("release_output_path"):
+        relative = Path(var["release_output_path"])
+        if relative.is_absolute() or ".." in relative.parts:
+            raise ValueError("release_output_path must stay inside the release")
+        return base_dir / relative
     kind = variable_temporal_kind(var)
     if kind == "monthly":
         return base_dir / "monthly" / f"{source}_{variable}_monthly_0.5deg.nc"
@@ -228,6 +233,11 @@ def main() -> None:
         kind = str(item.get("temporal_resolution", "monthly")).lower()
         folder = "annual" if kind == "annual" else ("static" if kind == "static" else "monthly")
         harmonized = base_dir / folder / str(output)
+        harmonized_rel = rel(harmonized, base_dir)
+        if harmonized_rel:
+            harmonized_files.append(harmonized_rel)
+        else:
+            missing_harmonized.append(f"{source}/{variable}")
         input_files = [str(value) for value in item.get("input_files", [])]
         source_entries.setdefault(
             source,
@@ -264,7 +274,7 @@ def main() -> None:
                     "inspection": None,
                 },
                 "raw_files": [],
-                "harmonized_files": [rel(harmonized, base_dir)] if harmonized.exists() else [],
+                "harmonized_files": [harmonized_rel] if harmonized_rel else [],
                 "manual_files": [],
                 "derived": True,
                 "derivation": {

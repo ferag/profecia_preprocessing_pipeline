@@ -1,0 +1,153 @@
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/> a skos:ConceptScheme ;
+  skos:prefLabel "PROFECIA preprocessing step types"@en, "Tipos de paso de preprocesado PROFECIA"@es ;
+  dcterms:description "Extensible operation vocabulary. Concepts are not OWL classes."@en ;
+  dcterms:license <https://spdx.org/licenses/CC0-1.0.html> ;
+  owl:versionInfo "1.0.0" .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/workflow-run> a skos:Concept ;
+  skos:prefLabel "workflow run"@en, "ejecución de workflow"@es ;
+  skos:definition "Execution of the overall preprocessing workflow."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/request-building> a skos:Concept ;
+  skos:prefLabel "request building"@en, "construcción de petición"@es ;
+  skos:definition "Construction of a machine-readable request to a data provider."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/acquisition> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/acquisition> a skos:Concept ;
+  skos:prefLabel "acquisition"@en, "adquisición"@es ;
+  skos:definition "Retrieval or registration of source data."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/manual-acquisition> a skos:Concept ;
+  skos:prefLabel "manual acquisition"@en, "adquisición manual"@es ;
+  skos:definition "Registration of source data obtained through a manual mechanism."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/acquisition> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/inspection> a skos:Concept ;
+  skos:prefLabel "inspection"@en, "inspección"@es ;
+  skos:definition "Inspection of data structure, coordinates, variables, or metadata."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/quality-control> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/format-conversion> a skos:Concept ;
+  skos:prefLabel "format conversion"@en, "conversión de formato"@es ;
+  skos:definition "Conversion between physical data encodings or formats."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/spatial-harmonization> a skos:Concept ;
+  skos:prefLabel "spatial harmonization"@en, "armonización espacial"@es ;
+  skos:definition "Transformation to common spatial conventions, coverage, or grid."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/reprojection> a skos:Concept ;
+  skos:prefLabel "reprojection"@en, "reproyección"@es ;
+  skos:definition "Transformation between coordinate reference systems."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/spatial-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/regridding> a skos:Concept ;
+  skos:prefLabel "regridding"@en, "cambio de rejilla"@es ;
+  skos:definition "Transformation from a source grid to a target grid."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/spatial-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/spatial-resampling> a skos:Concept ;
+  skos:prefLabel "spatial resampling"@en, "remuestreo espacial"@es ;
+  skos:definition "Estimation of values at new spatial support or resolution."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/spatial-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-harmonization> a skos:Concept ;
+  skos:prefLabel "temporal harmonization"@en, "armonización temporal"@es ;
+  skos:definition "Transformation to common temporal conventions or cadence."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-aggregation> a skos:Concept ;
+  skos:prefLabel "temporal aggregation"@en, "agregación temporal"@es ;
+  skos:definition "Aggregation from a finer to a coarser temporal resolution."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-interpolation> a skos:Concept ;
+  skos:prefLabel "temporal interpolation"@en, "interpolación temporal"@es ;
+  skos:definition "Estimation of values at unsampled temporal positions."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/unit-conversion> a skos:Concept ;
+  skos:prefLabel "unit conversion"@en, "conversión de unidades"@es ;
+  skos:definition "Conversion of measurements between compatible units."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/normalization> a skos:Concept ;
+  skos:prefLabel "normalization"@en, "normalización"@es ;
+  skos:definition "Transformation of values to a common numerical scale or convention."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/derived-variable> a skos:Concept ;
+  skos:prefLabel "derived variable"@en, "variable derivada"@es ;
+  skos:definition "Computation of a scientific variable from one or more input variables."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/masking> a skos:Concept ;
+  skos:prefLabel "masking"@en, "enmascarado"@es ;
+  skos:definition "Exclusion or marking of values according to a mask or validity rule."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/feature-selection> a skos:Concept ;
+  skos:prefLabel "feature selection"@en, "selección de variables"@es ;
+  skos:definition "Selection of variables or features for downstream use."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/static-to-dynamic-expansion> a skos:Concept ;
+  skos:prefLabel "static to dynamic expansion"@en, "expansión estática a dinámica"@es ;
+  skos:definition "Repetition of a static field over an explicit temporal axis."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:broader <https://w3id.org/profecia/vocab/preprocessing-step-type/temporal-harmonization> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/scientific-preprocessing> a skos:Concept ;
+  skos:prefLabel "scientific preprocessing"@en, "preprocesado científico"@es ;
+  skos:definition "Scientific transformation that prepares data for downstream analysis."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/metadata-generation> a skos:Concept ;
+  skos:prefLabel "metadata generation"@en, "generación de metadatos"@es ;
+  skos:definition "Generation of machine-readable descriptive or provenance metadata."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/quality-control> a skos:Concept ;
+  skos:prefLabel "quality control"@en, "control de calidad"@es ;
+  skos:definition "Assessment of a resource against explicit quality criteria."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/packaging> a skos:Concept ;
+  skos:prefLabel "packaging"@en, "empaquetado"@es ;
+  skos:definition "Assembly of data and metadata into a distributable research object."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .
+
+<https://w3id.org/profecia/vocab/preprocessing-step-type/manual-decision> a skos:Concept ;
+  skos:prefLabel "manual decision"@en, "decisión manual"@es ;
+  skos:definition "A documented human decision that affects preprocessing."@en ;
+  skos:inScheme <https://w3id.org/profecia/vocab/preprocessing-step-type/> ;
+  skos:topConceptOf <https://w3id.org/profecia/vocab/preprocessing-step-type/> .

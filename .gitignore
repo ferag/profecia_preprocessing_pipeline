@@ -21,4 +21,9 @@ __pycache__/
 *.pyo
 *.log
 *.tmp
+resources/
+workflows/data_foundation/config/data_foundation_all_available_portable.yml
+workflows/data_foundation/config/data_foundation_gmted2010_trial.yml
+workflows/data_foundation/config/profecia_inputs_all_available_*.yml
+workflows/data_foundation/VALIDATION_RESULTS.md
 .ipynb_checkpoints/

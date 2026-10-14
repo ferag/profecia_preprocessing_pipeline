@@ -62,6 +62,8 @@ def skip_api_acquisition(source, variable):
 
 
 def static_monthly_source(variable):
+    if variable == "elevation" and ("gmted2010", "elevation") in selected_pairs():
+        return f"{BASE_DIR}/work/gmted2010/elevation_0.5deg.nc"
     if variable in {"ph", "bulk", "cec", "clay", "sand", "silt", "soc", "total_n"}:
         return "resources/source_data/static/hwsd2_soil_0p5_100cm.nc"
     return f"resources/source_data/static/{variable}_0.5deg.nc"
@@ -178,6 +180,8 @@ BUNDLE_FILE_LISTS = [source_file_list_path(source) for source in BUNDLE_SOURCES]
 BUNDLE_DOWNLOAD_REPORTS = [source_download_report_path(source) for source in BUNDLE_SOURCES]
 BUNDLE_RAW_DIRS = [source_raw_dir(source) for source in BUNDLE_SOURCES]
 INSPECTIONS = [inspection_path(source, variable) for source, variable in API_PAIRS]
+if ("gmted2010", "elevation") in selected_pairs():
+    INSPECTIONS.append(inspection_path("gmted2010", "elevation"))
 
 HARMONIZED_MONTHLY_PAIRS = [
     (source, variable)
@@ -194,6 +198,7 @@ HARMONIZED_STATIC_SOURCES = sorted(
         source
         for source, variable in selected_pairs()
         if variable_temporal_kind(source, variable) == "static" and is_source_bundle(source)
+        and source != "gmted2010"
     }
 )
 HARMONIZED_MONTHLY_OUTPUTS = [
@@ -213,9 +218,11 @@ MANIFEST = f"{BASE_DIR}/manifest.json"
 CHECKSUMS = f"{BASE_DIR}/checksums.sha256"
 CROISSANT = f"{BASE_DIR}/fair/harmonized_netcdf_demo.croissant.jsonld"
 RELEASE_VALIDATION = f"{BASE_DIR}/validation/release_validation.json"
+SEMANTIC_RO_CRATE_VALIDATION = f"{BASE_DIR}/validation/semantic_rocrate_validation.json"
 RO_CRATE_DIR = f"{BASE_DIR}/ro-crate"
 RO_CRATE_METADATA = f"{RO_CRATE_DIR}/ro-crate-metadata.json"
 RO_CRATE_README = f"{RO_CRATE_DIR}/README.md"
+RO_CRATE_PREVIEW = f"{RO_CRATE_DIR}/ro-crate-preview.html"
 RO_CRATE_ARCHIVE = f"{BASE_DIR}/ro-crate.zip"
 
 
@@ -248,6 +255,8 @@ rule all:
         harmonized_outputs=HARMONIZED_OUTPUTS,
         harmonized_validation=HARMONIZED_VALIDATION,
         release_validation=RELEASE_VALIDATION,
+        semantic_ro_crate_validation=SEMANTIC_RO_CRATE_VALIDATION,
         ro_crate_metadata=RO_CRATE_METADATA,
         ro_crate_readme=RO_CRATE_README,
+        ro_crate_preview=RO_CRATE_PREVIEW,
         ro_crate_archive=RO_CRATE_ARCHIVE

@@ -72,6 +72,8 @@ rule write_ro_crate:
     output:
         metadata=RO_CRATE_METADATA,
         readme=RO_CRATE_README,
+        preview=RO_CRATE_PREVIEW,
+        semantic_validation=SEMANTIC_RO_CRATE_VALIDATION,
         archive=RO_CRATE_ARCHIVE
     shell:
         """

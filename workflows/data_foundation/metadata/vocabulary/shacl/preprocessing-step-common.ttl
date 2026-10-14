@@ -1,0 +1,23 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix profecia: <https://w3id.org/profecia/terms/> .
+@prefix schema: <http://schema.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+profecia:PreprocessingStepCommonShape a sh:NodeShape ;
+  sh:targetClass profecia:PreprocessingStep ;
+  sh:closed false ;
+  sh:property [ sh:path schema:name ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path schema:description ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path profecia:stepType ; sh:minCount 1 ; sh:class <http://www.w3.org/2004/02/skos/core#Concept> ] ;
+  sh:property [ sh:path profecia:input ; sh:minCount 1 ] ;
+  sh:property [ sh:path profecia:output ; sh:minCount 1 ] ;
+  sh:property [ sh:path profecia:method ; sh:minCount 1 ] ;
+  sh:property [ sh:path profecia:implementedBy ; sh:minCount 1 ] ;
+  sh:property [ sh:path profecia:relatedWorkflowAction ; sh:minCount 1 ; sh:class prov:Activity ] ;
+  sh:property [ sh:path profecia:status ; sh:minCount 1 ] ;
+  sh:or (
+    [ sh:property [ sh:path profecia:formula ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path profecia:parameter ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path profecia:rationale ; sh:minCount 1 ] ]
+    [ sh:property [ sh:path profecia:qualityControl ; sh:minCount 1 ] ]
+  ) .

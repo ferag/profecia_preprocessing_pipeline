@@ -1,0 +1,14 @@
+old_identifier,new_identifier,change,compatibility
+https://w3id.org/profecia/preprocessing-step-category,https://w3id.org/profecia/vocab/preprocessing-step-type/,SKOS scheme renamed and versioned namespace introduced,breaking identifier change
+https://w3id.org/profecia/preprocessing-step-category/{underscore_slug},https://w3id.org/profecia/vocab/preprocessing-step-type/{hyphenated-slug},Legacy category member to extensible SKOS concept,mechanical underscore-to-hyphen migration
+https://w3id.org/profecia/terms/{SpecializedStepClass},https://w3id.org/profecia/terms/PreprocessingStep,Specialized OWL classes replaced by one generic plan class,use profecia:stepType for specialization
+#action-hwsd2-sand-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-clay-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-silt-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-ph-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-soc-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-total-n-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-bulk-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-hwsd2-cec-harmonize,#action-hwsd2-static-harmonize,Shared static HWSD2 transformation now has one activity,old activity removed
+#action-local-hwsd2-monthly-{variable}-harmonize,#action-local-hwsd2-monthly-{variable}-harmonize,Eight real per-variable monthly expansion activities retained,unchanged
+#action-validate-harmonized-{variable},#action-validate-harmonized-profecia-inputs-all-available-v0,Per-variable fiction replaced by the single aggregate validator execution,breaking identifier change
